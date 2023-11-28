@@ -6,17 +6,17 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:13:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/25 00:28:47 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/27 19:40:46 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/getters.h"
 
-char **get_map()
+t_map **get_map()
 {
-	static char	**map = NULL;
+	static t_map	*map = NULL;
 
-	return (map);
+	return (&map);
 }
 
 t_textures **get_textures()

@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 01:33:42 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/27 18:53:34 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/27 19:19:44 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_atoi(char *str)
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
-	printf("str : %s || result = %d\n\n", str, result);
 	if (str[i] && !is_num(str[i]) && (str[i] != '\n' && !str[i + 1]))
 		return (-1);
 	return (result);

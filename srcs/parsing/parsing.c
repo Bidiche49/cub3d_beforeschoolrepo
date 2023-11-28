@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/27 18:51:17 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:04:29 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,17 @@ t_color	*convert_rgb(char *rgb)
 	char	**split_rgb;
 	t_color	*color;
 
-	printf("avant atoi\n\n");
-	printf("nb word : %d\n", ft_countword(rgb, ','));
 	if (ft_countword(rgb, ',') != 3)
 		return (error(ERR_RGB, NULL, PARS_KO), NULL);
 	split_rgb = ft_split(rgb, ',');
-	printf("g : %s\n", split_rgb[0]);
-	printf("g : %s\n", split_rgb[1]);
-	printf("g : %s", split_rgb[2]);
 	color = ft_calloc(1, sizeof(t_color *));
 	color->r = ft_atoi(split_rgb[0]);
-	// printf("r : %d\n", ft_atoi(split_rgb[0]));
 	if (color->r < 0 || color->r > 255)
 		return (error(ERR_RGB, NULL, PARS_KO), NULL);
 	color->g = ft_atoi(split_rgb[1]);
-	printf("g : %d\n", ft_atoi(split_rgb[1]));
 	if (color->g < 0 || color->g > 255)
 		return (error(ERR_RGB, NULL, PARS_KO), NULL);
 	color->b = ft_atoi(split_rgb[2]);
-	printf("b : %d\n", ft_atoi(split_rgb[2]));
 	if (color->b < 0 || color->b > 255)
 		return (error(ERR_RGB, NULL, PARS_KO), NULL);
 	return (color);
@@ -91,9 +83,7 @@ void	check_line(char *line)
 	t_textures	*textures;
 
 	textures = *get_textures();
-	printf("first word = \n");
 	first_word = get_first_word(line);
-	printf("first word = %s\n", first_word);
 	if (!ft_strcmp(first_word, "NO"))
 		textures->no_path = check_texture(line + ft_strlen(first_word) + 1);
 	else if (!ft_strcmp(first_word, "SO"))
@@ -144,16 +134,13 @@ void	parsing_file(char *path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("line = %s\n\n", line);
 		if (line[0] && line[0] != '\n' && textures_is_empty())
 			check_line(line);
-		else if (line[0] && line[0] != '\n' && !textures_is_empty())
-			parsing_map(line);
+		else if (line[0] && !textures_is_empty())
+			fill_map(line);
 		tracked_free(line);
-		printf("line = %s\n\n", line);
 		line = get_next_line(fd);
 	}
-	printf("after while\n\n");
 	if (textures_is_empty())
 		error (ERR_MAP_EMPTY, NULL, PARS_KO);
 	close(fd);
@@ -184,6 +171,7 @@ void	parsing(int argc, char **argv)
 	init_data();
 	parsing_file(argv[1]);
 	printf("after pars file\n");
-	parsing_map(argv[1]);
+	parsing_map();
 	print_textures();
+	print_map();
 }

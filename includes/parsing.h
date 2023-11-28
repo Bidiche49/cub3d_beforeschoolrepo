@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:32 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/25 00:21:31 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/27 19:17:37 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "cub.h"
 
 void	parsing(int argc, char **argv);
-void	parsing_map(char *path);
+void	parsing_map();
+void	print_map();
+void	fill_map(char *line);
 
 #endif
