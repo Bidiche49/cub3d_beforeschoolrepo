@@ -6,24 +6,30 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:32 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/27 19:17:37 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:55:59 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _PARSING_
-#define _PARSING_
+#ifndef PARSING_H
+# define PARSING_H
 
-#include <unistd.h>
-#include <math.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "get_next_line.h"
-#include "cub.h"
+# include "get_next_line.h"
+# include "getters.h"
+# include "cub.h"
 
 void	parsing(int argc, char **argv);
-void	parsing_map();
-void	print_map();
+void	parsing_map(void);
+void	print_map(void);
 void	fill_map(char *line);
+
+void	check_ext(char *path, char *ext);
+void	check_path(char *path);
+void	check_file(char *path, int *fd);
+void	check_line_texture(char *line);
+void	check_wall(t_map *map);
+void	check_char(t_map *map);
+int		textures_is_empty(void);
+int		is_wall_space(char c);
+int		is_map_char(char c);
 
 #endif

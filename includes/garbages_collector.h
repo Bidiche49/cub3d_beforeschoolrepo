@@ -6,15 +6,15 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:05:00 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/24 18:14:35 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:16:10 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _GARBAGES_COLLECTOR_
-#define _GARBAGES_COLLECTOR_
+#ifndef GARBAGES_COLLECTOR_H
+# define GARBAGES_COLLECTOR_H
 
-#include <stdlib.h>
-#include "errors.h"
+# include <stdlib.h>
+# include "errors.h"
 
 /*********************************/
 /*            struct             */
@@ -29,8 +29,8 @@ struct s_garbage{
 /*********************************/
 /*          functions            */
 /*********************************/
-void			collect_ptr();
-void			garbage_collect();
+void			collect_ptr(void);
+void			garbage_collect(void);
 void			tracked_free(void *ptr);
 t_garbage		**get_garbage(void);
 

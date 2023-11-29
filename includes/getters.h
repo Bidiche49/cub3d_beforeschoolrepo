@@ -6,14 +6,14 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/27 19:52:28 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:16:54 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _GETTERS_
-#define _GETTERS_
+#ifndef GETTERS_H
+# define GETTERS_H
 
-#include <unistd.h>
+# include <unistd.h>
 
 /*********************************/
 /*            structs            */
@@ -45,7 +45,7 @@ struct s_textures{
 /*********************************/
 /*            getters            */
 /*********************************/
-t_map		**get_map();
-t_textures	**get_textures();
+t_map		**get_map(void);
+t_textures	**get_textures(void);
 
 #endif

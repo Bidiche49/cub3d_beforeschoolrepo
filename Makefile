@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/11/25 01:35:40 by ntardy           ###   ########.fr        #
+#    Updated: 2023/11/29 10:53:06 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,10 @@ FILES_UTILS =	$(UTILS_PATH)ft_str.c				\
 				$(GARBAGE_PATH)ft_calloc.c
 
 FILES_PARS =	$(PARS_PATH)parsing.c				\
-				$(PARS_PATH)parsing_map.c
+				$(PARS_PATH)parsing_map.c			\
+				$(PARS_PATH)check_parsing_map.c		\
+				$(PARS_PATH)check_parsing.c			\
+				$(PARS_PATH)parsing_textures.c
 
 SRCS =			$(SRCS_PATH)cub.c					\
 				$(FILES_PARS)						\

@@ -6,21 +6,21 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:51:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/25 01:43:57 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:21:17 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _LIB_UTILS_
-#define _LIB_UTILS_
+#ifndef LIB_UTILS_H
+# define LIB_UTILS_H
 
-#include "cub.h"
+# include "cub.h"
 
 /*********************************/
 /*            ft_str             */
 /*********************************/
-int	ft_strlen(char *str);
-int	ft_strcmp(const char *s1, const char *s2);
-int	ft_countword(char const *s, char c);
+int		ft_strlen(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_countword(char const *s, char c);
 
 /*********************************/
 /*           ft_write            */
@@ -34,9 +34,8 @@ void	ft_putstrfd(char *str, int fd);
 char	*get_first_word(char *str);
 char	*ft_strdup(char *src);
 char	*ft_substr(char *s, int start, int len);
-
 char	**ft_split(char *s, char c);
 
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
 
 #endif

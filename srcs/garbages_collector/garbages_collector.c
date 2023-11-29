@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:03:54 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/24 18:30:12 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:38:48 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 t_garbage	**get_garbage(void)
 {
 	static t_garbage	*garbage = NULL;
+
 	return (&garbage);
 }
 
-void tracked_free(void *ptr)
+void	null_this_free(void *ptr)
 {
-	t_garbage **garbages;
-	t_garbage *current;
-	t_garbage *prev ;
+	if (!ptr)
+		return ;
+	free(ptr);
+	ptr = NULL;
+}
+
+void	tracked_free(void *ptr)
+{
+	t_garbage	**garbages;
+	t_garbage	*current;
+	t_garbage	*prev ;
 
 	if (!ptr)
 		return ;
@@ -37,10 +46,8 @@ void tracked_free(void *ptr)
 				prev->next = current->next;
 			else
 				(*garbages) = current->next;
-			free(current->ptr);
-			current->ptr = NULL;
-			free(current);
-			current = NULL;
+			null_this_free(current->ptr);
+			null_this_free(current);
 			return ;
 		}
 		prev = current;
@@ -48,10 +55,10 @@ void tracked_free(void *ptr)
 	}
 }
 
-void garbage_collect()
+void	garbage_collect(void)
 {
-	t_garbage *current;
-	t_garbage *next;
+	t_garbage	*current;
+	t_garbage	*next;
 
 	next = NULL;
 	current = *get_garbage();
