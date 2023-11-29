@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:54 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 11:01:54 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:50:21 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_line(char *actual_line, char *line)
 		{
 			if (!is_wall_space(line[i]) || !is_wall_space(line[i + 1])
 				|| !is_wall_space(line[i + 2]))
-				error(ERR_WALL, " line_actual_line", PARS_KO);
+				error(ERR_WALL, NULL, PARS_KO);
 		}
 		i++;
 	}
@@ -34,7 +34,7 @@ void	check_line(char *actual_line, char *line)
 		while (line[i])
 		{
 			if (line[i] != '1')
-				error(ERR_WALL, " line_line", PARS_KO);
+				error(ERR_WALL, NULL, PARS_KO);
 			i++;
 		}
 	}
@@ -94,4 +94,25 @@ void	check_char(t_map *map)
 				error(ERR_FORBID_CHAR, NULL, PARS_KO);
 		map = map->next;
 	}
+}
+
+void	check_player(t_map *map)
+{
+	int	i;
+	int	nb_player;
+
+	nb_player = 0;
+	while (map)
+	{
+		i = 0;
+		while (map->line[i])
+		{
+			if (!is_wall_space(map->line[i]) && map->line[i] != '0')
+				nb_player++;
+			i++;
+		}
+		map = map->next;
+	}
+	if (nb_player != 1)
+		error(ERR_PLAYER, NULL, PARS_KO);
 }

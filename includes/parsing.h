@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:32 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 10:55:59 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 12:11:01 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	check_file(char *path, int *fd);
 void	check_line_texture(char *line);
 void	check_wall(t_map *map);
 void	check_char(t_map *map);
-int		textures_is_empty(void);
+void	check_player(t_map *map);
+int		textures_is_empty(int ref);
 int		is_wall_space(char c);
 int		is_map_char(char c);
 

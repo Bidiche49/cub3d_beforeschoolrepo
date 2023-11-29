@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 10:57:36 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 12:26:57 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	parsing_file(char *path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[0] && line[0] != '\n' && textures_is_empty())
-			check_line_texture(line);
-		else if (line[0] && !textures_is_empty())
+		if (line[0] && line[0] != '\n' && textures_is_empty(2))
+			check_line_texture(line); //////////Penser a bien close les fds dans tous les cas
+		else if (line[0] && !textures_is_empty(2))
 			fill_map(line);
 		tracked_free(line);
 		line = get_next_line(fd);
 	}
-	if (textures_is_empty())
+	if (textures_is_empty(2))
 		error (ERR_MAP_EMPTY, NULL, PARS_KO);
 	close(fd);
 }

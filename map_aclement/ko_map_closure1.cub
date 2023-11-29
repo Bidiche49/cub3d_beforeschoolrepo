@@ -1,0 +1,10 @@
+NO ./textures/wall64-no.xpm
+SO ./textures/wall64-so.xpm
+WE ./textures/wall64-we.xpm
+EA ./textures/wall64-ea.xpm
+F 254,255,170
+C 0,0,42
+
+01111
+10E01
+11111

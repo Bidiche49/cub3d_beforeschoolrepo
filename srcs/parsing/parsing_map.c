@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:54:14 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 11:11:58 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:46:00 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ void	parsing_map(void)
 	t_map	**map;
 
 	map = get_map();
-	if (!map || !(*map)->next)
+	if (!map || !(*map)->next || !(*map)->next->next)
 		error(ERR_LITTLE_MAP, NULL, PARS_KO);
 	check_char(*map);
+	check_player(*map);
 	check_wall(*map);
 }
