@@ -6,18 +6,11 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:03:54 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 10:38:48 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:24:04 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/garbages_collector.h"
-
-t_garbage	**get_garbage(void)
-{
-	static t_garbage	*garbage = NULL;
-
-	return (&garbage);
-}
+#include "../../includes/collectors.h"
 
 void	null_this_free(void *ptr)
 {

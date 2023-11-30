@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:54 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 11:50:21 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:30:12 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,10 @@ void	check_char(t_map *map)
 		if (!map->line || (map->line[0] && map->line[0] == '\n'))
 			error(ERR_LINE_EMPTY, NULL, PARS_KO);
 		while (map->line[i])
+		{
 			if (!is_map_char(map->line[i++]))
 				error(ERR_FORBID_CHAR, NULL, PARS_KO);
+		}
 		map = map->next;
 	}
 }

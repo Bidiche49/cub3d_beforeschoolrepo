@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:48:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 10:14:11 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:51:59 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include "parsing.h"
 # include "errors.h"
-# include "garbages_collector.h"
+# include "collectors.h"
 # include "getters.h"
 
 # define RED     "\x1b[31m"

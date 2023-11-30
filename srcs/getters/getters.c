@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:13:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 10:39:39 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:24:04 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,18 @@ t_textures	**get_textures(void)
 	static t_textures	*textures = NULL;
 
 	return (&textures);
+}
+
+t_garbage	**get_garbage(void)
+{
+	static t_garbage	*garbage = NULL;
+
+	return (&garbage);
+}
+
+t_fd	**get_fd(void)
+{
+	static t_fd	*fd = NULL;
+
+	return (&fd);
 }

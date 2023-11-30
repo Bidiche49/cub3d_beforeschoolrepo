@@ -6,11 +6,11 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:11:22 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/24 20:50:08 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:32:06 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/garbages_collector.h"
+#include "../../includes/collectors.h"
 
 void	*ft_memset(void *s, int c, size_t n)
 {
@@ -46,7 +46,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (malloc_error(), NULL);
 	new = malloc(sizeof(t_garbage));
 	if (!new)
-		return (malloc_error(), garbage_collect(), NULL);
+		return (free(ptr), malloc_error(), NULL);
 	new->ptr = ptr;
 	new->next = (*garbages);
 	(*garbages) = new;

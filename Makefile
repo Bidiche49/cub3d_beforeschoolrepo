@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/11/29 10:53:06 by ntardy           ###   ########.fr        #
+#    Updated: 2023/11/30 22:15:55 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ UTILS_PATH =	$(SRCS_PATH)lib_util/
 GNL_PATH =		$(SRCS_PATH)GNL/
 ERROR_PATH =	$(SRCS_PATH)errors/
 PARS_PATH =		$(SRCS_PATH)parsing/
-GARBAGE_PATH =	$(SRCS_PATH)garbages_collector/
+GARBAGE_PATH =	$(SRCS_PATH)collectors/
 GETTERS_PATH =	$(SRCS_PATH)getters/
 INCLUDE_PATH =	includes/
 
@@ -43,6 +43,8 @@ FILES_UTILS =	$(UTILS_PATH)ft_str.c				\
 				$(GNL_PATH)get_next_line_utils.c	\
 				$(ERROR_PATH)errors.c				\
 				$(GETTERS_PATH)getters.c			\
+
+FILES_GARBAGE =	$(GARBAGE_PATH)fds_collector.c		\
 				$(GARBAGE_PATH)garbages_collector.c	\
 				$(GARBAGE_PATH)ft_calloc.c
 
@@ -54,6 +56,7 @@ FILES_PARS =	$(PARS_PATH)parsing.c				\
 
 SRCS =			$(SRCS_PATH)cub.c					\
 				$(FILES_PARS)						\
+				$(FILES_GARBAGE)					\
 				$(FILES_UTILS)
 
 
@@ -61,7 +64,7 @@ OBJS =			$(SRCS:.c=.o)
 
 HEADER =		$(INCLUDE_PATH)cub.h				\
 				$(INCLUDE_PATH)errors.h				\
-				$(INCLUDE_PATH)garbages_collector.h	\
+				$(INCLUDE_PATH)collectors.h			\
 				$(INCLUDE_PATH)get_next_line.h		\
 				$(INCLUDE_PATH)getters.h			\
 				$(INCLUDE_PATH)lib_utils.h			\
@@ -99,6 +102,10 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+valgrind: all
+	@echo "$(YELLOW)Running minishell with valgrind...$(RESET)"
+	@valgrind $(VALGRIND_OPTIONS) ./$(NAME) $(ARGS)
 
 #*********************************#
 #*           COMMANDS            *#

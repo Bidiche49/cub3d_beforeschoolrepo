@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:54:14 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 11:46:00 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:45:52 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,21 @@ void	fill_map(char *line)
 	t_map	*current;
 	t_map	*new;
 
-	new = ft_calloc(1, sizeof(t_map *));
+	new = ft_calloc(1, sizeof(t_map));
 	new->line = ft_strdup(line);
 	if (ft_strlen(new->line) > 1
 		&& new->line[ft_strlen(new->line) - 1] == '\n')
 		new->line[ft_strlen(new->line) - 1] = '\0';
 	new->next = NULL;
 	map = get_map();
-	if (!*map)
+	if (!(*map))
 	{
 		if (line && line[0] && line[0] == '\n')
 			return ;
-		return (*map = new, (void)0);
+		(*map) = new;
+		return ;
 	}
-	current = *map;
+	current = (*map);
 	while (current->next != NULL)
 		current = current->next;
 	current->next = new;

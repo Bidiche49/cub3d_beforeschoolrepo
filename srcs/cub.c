@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:46:20 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/24 23:15:02 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/01 00:02:34 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 int	main(int argc, char **argv)
 {
 	parsing(argc, argv);
+	collect_fd();
+	garbage_collect();
+	printf("\n\n=============FIN==================\n");
 	return (0);
 }
