@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 16:46:20 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 01:51:50 by ntardy           ###   ########.fr       */
+/*   Created: 2023/12/01 01:24:55 by ntardy            #+#    #+#             */
+/*   Updated: 2023/12/01 01:38:21 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/lib_utils.h"
 
-int	main(int argc, char **argv)
+void del_pars_map()
 {
-	parsing(argc, argv);
-	garbage_collect();
-	// printf("\n\n=============FIN==================\n");
-	return (0);
+    t_pars_map  **map;
+    t_pars_map  *line_map;
+    
+    map = get_pars_map();
+    while ((*map))
+    {
+        line_map = (*map);
+        (*map) = (*map)->next;
+        tracked_free(line_map->line);
+        tracked_free(line_map);
+    }
+    tracked_free(map);
 }

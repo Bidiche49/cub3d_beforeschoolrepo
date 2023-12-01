@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:54 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/30 23:30:12 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/01 00:13:11 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	check_wall_and_space(char *line, int ref)
 	}
 }
 
-void	check_wall(t_map *map)
+void	check_wall(t_pars_map *map)
 {
 	char	*prev_line;
 
@@ -80,7 +80,7 @@ void	check_wall(t_map *map)
 	check_wall_and_space(map->line, 1);
 }
 
-void	check_char(t_map *map)
+void	check_char(t_pars_map *map)
 {
 	int	i;
 
@@ -98,7 +98,7 @@ void	check_char(t_map *map)
 	}
 }
 
-void	check_player(t_map *map)
+void	check_player(t_pars_map *map)
 {
 	int	i;
 	int	nb_player;

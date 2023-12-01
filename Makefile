@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/11/30 22:15:55 by ntardy           ###   ########.fr        #
+#    Updated: 2023/12/01 01:36:53 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ FILES_UTILS =	$(UTILS_PATH)ft_str.c				\
 				$(UTILS_PATH)ft_write.c				\
 				$(UTILS_PATH)ft_atoi.c				\
 				$(UTILS_PATH)ft_split.c				\
+				$(UTILS_PATH)ft_lst.c				\
 				$(GNL_PATH)get_next_line.c			\
 				$(GNL_PATH)get_next_line_utils.c	\
 				$(ERROR_PATH)errors.c				\

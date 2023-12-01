@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:47:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/30 22:30:39 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/01 02:12:27 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,20 @@ void	check_file(char *path, int *fd)
 	*fd = tracked_open(path, O_RDONLY);
 	if (*fd == -1)
 		error(ERR_OPEN_KO, path, OPEN_KO);
+}
+
+int	is_wall_space(char c)
+{
+	if (c == '1' || c == ' ')
+		return (1);
+	return (0);
+}
+
+int is_player(char c)
+{
+	if (c == 'S' || c == 'N')
+		return (1);
+	if (c == 'E' || c == 'O')
+		return (1);
+	return (0);
 }

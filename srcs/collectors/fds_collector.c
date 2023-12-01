@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:02:29 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 00:01:35 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/01 02:13:37 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	collect_fd(void)
 	fd_current = *get_fd();
 	while (fd_current)
 	{
-		printf("while collect fd\n");
 		close(fd_current->fd);
 		fd_current = fd_current->next;
 	}

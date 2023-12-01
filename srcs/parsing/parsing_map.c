@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:54:14 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/30 23:45:52 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/01 02:13:04 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,28 @@
 
 void	print_map(void)
 {
-	t_map	**map;
-	t_map	*current;
+	t_data		*data;
+	int			y;
 
-	map = get_map();
-	if (!*map)
-		return ;
-	current = *map;
-	while (current != NULL)
-	{
-		printf("%s\n", current->line);
-		current = current->next;
-	}
+	data = *get_data();
+	y = 0;
+	while (data->map[y])
+		printf("%s\n", data->map[y++]);
 }
 
 void	fill_map(char *line)
 {
-	t_map	**map;
-	t_map	*current;
-	t_map	*new;
+	t_pars_map	**map;
+	t_pars_map	*current;
+	t_pars_map	*new;
 
-	new = ft_calloc(1, sizeof(t_map));
+	new = ft_calloc(1, sizeof(t_pars_map));
 	new->line = ft_strdup(line);
 	if (ft_strlen(new->line) > 1
 		&& new->line[ft_strlen(new->line) - 1] == '\n')
 		new->line[ft_strlen(new->line) - 1] = '\0';
 	new->next = NULL;
-	map = get_map();
+	map = get_pars_map();
 	if (!(*map))
 	{
 		if (line && line[0] && line[0] == '\n')
@@ -54,29 +49,46 @@ void	fill_map(char *line)
 	current->next = new;
 }
 
-int	is_wall_space(char c)
-{
-	if (c == '1' || c == ' ')
-		return (1);
-	return (0);
-}
-
 int	is_map_char(char c)
 {
 	if (c == '0')
 		return (1);
-	if (c == 'S' || c == 'N')
-		return (1);
-	if (c == 'E' || c == 'O')
+	if (is_player(c))
 		return (1);
 	return (is_wall_space(c));
 }
 
+
+char	**cast_map(void)
+{
+	t_pars_map	*line;
+	char		**map;
+	int			nb_line;
+	
+	line = *get_pars_map();
+	nb_line = 1;
+	while (line)
+	{
+		line = line->next;
+		nb_line++;
+	}
+	map = ft_calloc(sizeof(char *), nb_line);
+	line = *get_pars_map();
+	nb_line = 0;
+	while (line)
+	{
+		map[nb_line++] = ft_strdup(line->line);
+		line = line->next;
+	}
+	del_pars_map();
+	return (map);
+}
+
 void	parsing_map(void)
 {
-	t_map	**map;
+	t_pars_map	**map;
 
-	map = get_map();
+	map = get_pars_map();
 	if (!map || !(*map)->next || !(*map)->next->next)
 		error(ERR_LITTLE_MAP, NULL, PARS_KO);
 	check_char(*map);

@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/30 21:52:57 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/01 02:22:44 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@
 /*********************************/
 /*            structs            */
 /*********************************/
-typedef struct s_map		t_map;
+typedef struct s_pars_map	t_pars_map;
 typedef struct s_color		t_color;
 typedef struct s_textures	t_textures;
 typedef struct s_garbage	t_garbage;
 typedef struct s_fd			t_fd;
+typedef struct s_player		t_player;
+typedef struct s_data		t_data;
 
-struct s_map{
+struct s_pars_map{
 	char	*line;
-	t_map	*next;
+	t_pars_map	*next;
 } ;
 
 struct s_color{
@@ -54,12 +56,28 @@ struct s_fd{
 	t_fd	*next;
 } ;
 
+struct s_player{
+	int		posX;
+	int		posY;
+	int		startDir;
+};
+
+
+struct s_data{
+	char		**map;
+	t_textures	*textures;
+	t_player	player;
+};
+
+
 /*********************************/
 /*            getters            */
 /*********************************/
-t_map		**get_map(void);
-t_textures	**get_textures(void);
-t_garbage	**get_garbage(void);
-t_fd		**get_fd(void);
+t_pars_map		**get_pars_map(void);
+t_textures		**get_textures(void);
+t_garbage		**get_garbage(void);
+t_fd			**get_fd(void);
+t_data			**get_data(void);
+
 
 #endif
