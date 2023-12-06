@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:54:14 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 14:32:40 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:23:15 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,41 @@ char	**cast_map(void)
 	return (map);
 }
 
+void	check_empty_line(t_pars_map *map)
+{
+	t_pars_map *tmp;
+
+	tmp = NULL;
+	while (map)
+	{
+		if (map->next && map->next->line && map->next->line[0] == '\n')
+		{
+			tmp = map;
+			map = map->next;
+		}
+		while (map && map->line && map->line[0] == '\n')
+		{
+			map = map->next;
+			if (map && map->line[0] && map->line[0] != '\n')
+				error(ERR_LINE_EMPTY, NULL, PARS_KO);
+		}
+		if (map)
+			map = map->next;
+	}
+	if (tmp)
+	{
+		map = tmp->next;
+		tmp->next = NULL;
+		while (map)
+		{
+			tmp = map->next;
+			tracked_free(map->line);
+			tracked_free(map);
+			map = tmp;
+		}
+	}
+}
+
 void	parsing_map(void)
 {
 	t_pars_map	**map;
@@ -82,6 +117,7 @@ void	parsing_map(void)
 		error(ERR_MAP_EMPTY, NULL, PARS_KO);
 	if (!(*map)->next || !(*map)->next->next)
 		error(ERR_LITTLE_MAP, NULL, PARS_KO);
+	check_empty_line(*map);
 	check_char(*map);
 	check_player(*map);
 	check_wall(*map);
