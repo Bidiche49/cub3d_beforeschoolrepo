@@ -6,22 +6,11 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:54:14 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 02:13:04 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 14:32:40 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
-
-void	print_map(void)
-{
-	t_data		*data;
-	int			y;
-
-	data = *get_data();
-	y = 0;
-	while (data->map[y])
-		printf("%s\n", data->map[y++]);
-}
 
 void	fill_map(char *line)
 {
@@ -64,7 +53,7 @@ char	**cast_map(void)
 	t_pars_map	*line;
 	char		**map;
 	int			nb_line;
-	
+
 	line = *get_pars_map();
 	nb_line = 1;
 	while (line)
@@ -89,7 +78,9 @@ void	parsing_map(void)
 	t_pars_map	**map;
 
 	map = get_pars_map();
-	if (!map || !(*map)->next || !(*map)->next->next)
+	if (!map || !(*map))
+		error(ERR_MAP_EMPTY, NULL, PARS_KO);
+	if (!(*map)->next || !(*map)->next->next)
 		error(ERR_LITTLE_MAP, NULL, PARS_KO);
 	check_char(*map);
 	check_player(*map);

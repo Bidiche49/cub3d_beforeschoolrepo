@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:32 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 02:47:01 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 13:17:56 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	parsing(int argc, char **argv);
 void	parsing_map(void);
-void	print_map(void);
+void	print_data(void);/////A ENLEVER!!
 void	fill_map(char *line);
 
 void	check_ext(char *path, char *ext);

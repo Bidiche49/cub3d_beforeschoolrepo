@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:32 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/29 11:47:06 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 13:11:41 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define ERR_WRONG_ARG "you must enter 1 argument (map path)"
 # define ERR_PATH_NULL "path can't be null"
 # define ERR_WRONG_EXT " wrong extension, must be "
-# define ERR_OPEN_KO "unable to open the file, please check the path "
+# define ERR_OPEN_KO "unable to open the file, please check the path or access right for "
 # define ERR_OPEN_DIR " is a directory, enter a map path"
 # define ERR_MALLOC_KO "malloc KO"
 # define ERR_PATTERN_FILE "pattern of the map not respected"

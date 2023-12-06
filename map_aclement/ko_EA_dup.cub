@@ -2,7 +2,7 @@ NO ./textures/wall64-no.xpm
 SO ./textures/wall64-so.xpm
 EA ./textures/wall64-ea.xpm
 WE ./textures/wall64-we.xpm
-EA ./textures/wall64-ea.xpm
+WE ./textures/wall64-we.xpm
 F 254,255,170
 C 0,0,42
 

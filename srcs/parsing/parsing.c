@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 02:22:23 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 14:29:43 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	parsing_file(char *path)
 	}
 	if (textures_is_empty(2))
 		error (ERR_MAP_EMPTY, NULL, PARS_KO);
+	
 	tracked_close(fd);
 }
 
@@ -83,7 +84,7 @@ t_player	fill_player(char **map)
 void	fill_data(void)
 {
 	t_data	**data;
-	
+
 	data = get_data();
 	*data = ft_calloc(sizeof(t_data), 1);
 	(void)data;
@@ -101,5 +102,5 @@ void	parsing(int argc, char **argv)
 	parsing_file(argv[1]);
 	parsing_map();
 	fill_data();
-	print_map();
+	print_data();
 }
