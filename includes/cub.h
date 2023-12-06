@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:48:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/30 21:51:59 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:53:28 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "errors.h"
 # include "collectors.h"
 # include "getters.h"
+# include "game.h"
+# include "../minilibx-linux/mlx.h"
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 14:29:43 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 17:55:50 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parsing_file(char *path)
 	}
 	if (textures_is_empty(2))
 		error (ERR_MAP_EMPTY, NULL, PARS_KO);
-	
+
 	tracked_close(fd);
 }
 
@@ -87,7 +87,7 @@ void	fill_data(void)
 
 	data = get_data();
 	*data = ft_calloc(sizeof(t_data), 1);
-	(void)data;
+	(*data)->ptr = ft_calloc(1, sizeof(t_ptr));
 	(*data)->textures = *get_textures();
 	(*data)->map = cast_map();
 	(*data)->player = fill_player((*data)->map);

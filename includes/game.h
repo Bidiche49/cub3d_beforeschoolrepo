@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 16:46:20 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 19:29:03 by audrye           ###   ########.fr       */
+/*   Created: 2023/12/06 18:50:22 by audrye            #+#    #+#             */
+/*   Updated: 2023/12/06 19:25:02 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#ifndef GAME_H
+# define GAME_H
 
-int	main(int argc, char **argv)
-{
-	parsing(argc, argv);
-	mlx_loop_init();
+# include "cub.h"
 
-	// printf("\n\n=============FIN==================\n");
-	exit_game(NULL);
-	return (0);
-}
+int		deal_key(int key, t_data *data);
+void	mlx_loop_init();
+void	exit_game(char *str);
+
+
+#endif

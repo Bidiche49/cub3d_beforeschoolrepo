@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getters.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 13:14:03 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 18:45:31 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_fd			t_fd;
 typedef struct s_player		t_player;
 typedef struct s_data		t_data;
+typedef struct s_ptr		t_ptr;
 
 struct s_pars_map{
 	char	*line;
@@ -42,6 +43,10 @@ struct s_textures{
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
+	void	*no_img;
+	void	*so_img;
+	void	*we_img;
+	void	*ea_img;
 	t_color	*floor;
 	t_color	*ceiling;
 } ;
@@ -60,13 +65,19 @@ struct s_player{
 	int		posX;
 	int		posY;
 	int		startDir;
-};
+} ;
 
 struct s_data{
 	char		**map;
 	t_textures	*textures;
 	t_player	player;
-};
+	t_ptr		*ptr;
+} ;
+
+struct s_ptr{
+	void	*mlx;
+	void	*win;
+} ;
 
 
 /*********************************/

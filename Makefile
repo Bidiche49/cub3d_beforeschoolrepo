@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
+#    By: audrye <audrye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/12/06 13:21:30 by ntardy           ###   ########.fr        #
+#    Updated: 2023/12/06 19:25:21 by audrye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=	cub3d
+NAME				=	cub3D
 CC					=	gcc
+LIB_MLX =        minilibx-linux
 
 #*********************************#
 #*             FLAGS             *#
@@ -29,6 +30,7 @@ ERROR_PATH =	$(SRCS_PATH)errors/
 PARS_PATH =		$(SRCS_PATH)parsing/
 GARBAGE_PATH =	$(SRCS_PATH)collectors/
 GETTERS_PATH =	$(SRCS_PATH)getters/
+GAME_PATH =	$(SRCS_PATH)game/
 INCLUDE_PATH =	includes/
 
 #*********************************#
@@ -55,14 +57,20 @@ FILES_PARS =	$(PARS_PATH)parsing.c				\
 				$(PARS_PATH)check_parsing.c			\
 				$(PARS_PATH)parsing_textures.c
 
+FILES_GAME =	$(GAME_PATH)init_mlx.c				\
+				$(GAME_PATH)exit.c
+
 SRCS =			$(SRCS_PATH)cub.c					\
 				$(FILES_PARS)						\
 				$(FILES_GARBAGE)					\
 				$(FILES_UTILS)						\
+				$(FILES_GAME)						\
 				$(SRCS_PATH)print_data.c####################TODEL
 
 
 OBJS =			$(SRCS:.c=.o)
+
+MLX =        -L$(LIB_MLX) -lmlx_Linux -L/usr/lib -I$(LIB_MLX) -lXext -lX11 -lm -lz
 
 HEADER =		$(INCLUDE_PATH)cub.h				\
 				$(INCLUDE_PATH)errors.h				\
@@ -70,7 +78,8 @@ HEADER =		$(INCLUDE_PATH)cub.h				\
 				$(INCLUDE_PATH)get_next_line.h		\
 				$(INCLUDE_PATH)getters.h			\
 				$(INCLUDE_PATH)lib_utils.h			\
-				$(INCLUDE_PATH)parsing.h
+				$(INCLUDE_PATH)parsing.h			\
+				$(INCLUDE_PATH)game.h
 
 #*********************************#
 #*            COLORS             *#
@@ -85,11 +94,13 @@ YELLOW	= \033[33m
 
 all: $(NAME)
 
+
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE_PATH)
+	@make -C $(LIB_MLX)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE_PATH) -I $(LIB_MLX) $(MLX)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE_PATH)
+	$(CC) $(CFLAGS) -I/usr/include -I$(LIB_MLX) -Imlx_linux -c $< -o $@ -I $(INCLUDE_PATH)
 
 #*********************************#
 #*         PHONY TARGETS         *#

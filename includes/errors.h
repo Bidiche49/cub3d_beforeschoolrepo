@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:52:32 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 13:11:41 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 19:14:53 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 # define ERR_WALL "wall must be close"
 # define ERR_RGB "the colour of the floor/ceiling must comply with the rgb \
 pattern (0-255,0-255,0-255)"
+# define ERR_PTR_MLX_KO "init the mlx fail"
+# define ERR_PTR_WIN_KO "init the window fail"
+# define ERR_IMG "this image loading fail "
+
 
 /*********************************/
 /*          error code           */
@@ -40,7 +44,8 @@ pattern (0-255,0-255,0-255)"
 # define MALL_KO 55
 # define OPEN_KO 10
 # define PARS_KO 3
-# define ARG_NOK 3
+# define ARG_NOK 4
+# define MLX_KO 5
 
 /*********************************/
 /*           functions           */
