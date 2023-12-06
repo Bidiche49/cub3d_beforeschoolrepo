@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:44:15 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 00:02:39 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 13:47:55 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ void	check_line_texture(char *line)
 	textures = *get_textures();
 	first_word = get_first_word(line);
 	start = line + ft_strlen(first_word) + 1;
-	if (!ft_strcmp(first_word, "NO"))
+	if (!ft_strcmp(first_word, "NO") && !textures->no_path)
 		textures->no_path = check_texture(start);
-	else if (!ft_strcmp(first_word, "SO"))
+	else if (!ft_strcmp(first_word, "SO") && !textures->so_path)
 		textures->so_path = check_texture(start);
-	else if (!ft_strcmp(first_word, "WE"))
+	else if (!ft_strcmp(first_word, "WE") && !textures->we_path)
 		textures->we_path = check_texture(start);
-	else if (!ft_strcmp(first_word, "EA"))
+	else if (!ft_strcmp(first_word, "EA") && !textures->ea_path)
 		textures->ea_path = check_texture(start);
-	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "C"))
+	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "C") && textures->ceiling->b == -1)
 		convert_rgb(start, textures->ceiling);
-	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "F"))
+	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "F") && textures->floor->b == -1)
 		convert_rgb(start, textures->floor);
 	else
 		error(ERR_PATTERN_FILE, NULL, PARS_KO);

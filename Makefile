@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/12/01 01:36:53 by ntardy           ###   ########.fr        #
+#    Updated: 2023/12/06 13:21:30 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ FILES_PARS =	$(PARS_PATH)parsing.c				\
 SRCS =			$(SRCS_PATH)cub.c					\
 				$(FILES_PARS)						\
 				$(FILES_GARBAGE)					\
-				$(FILES_UTILS)
+				$(FILES_UTILS)						\
+				$(SRCS_PATH)print_data.c####################TODEL
 
 
 OBJS =			$(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 02:22:44 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/06 13:14:03 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ struct s_player{
 	int		posY;
 	int		startDir;
 };
-
 
 struct s_data{
 	char		**map;
