@@ -6,7 +6,7 @@
 #    By: audrye <audrye@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/12/06 19:25:21 by audrye           ###   ########.fr        #
+#    Updated: 2023/12/08 16:17:04 by audrye           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ FILES_PARS =	$(PARS_PATH)parsing.c				\
 				$(PARS_PATH)parsing_textures.c
 
 FILES_GAME =	$(GAME_PATH)init_mlx.c				\
-				$(GAME_PATH)exit.c
+				$(GAME_PATH)exit.c					\
+				$(GAME_PATH)raycasting.c
 
 SRCS =			$(SRCS_PATH)cub.c					\
 				$(FILES_PARS)						\
@@ -79,7 +80,7 @@ HEADER =		$(INCLUDE_PATH)cub.h				\
 				$(INCLUDE_PATH)getters.h			\
 				$(INCLUDE_PATH)lib_utils.h			\
 				$(INCLUDE_PATH)parsing.h			\
-				$(INCLUDE_PATH)game.h
+				$(INCLUDE_PATH)game.h				\
 
 #*********************************#
 #*            COLORS             *#

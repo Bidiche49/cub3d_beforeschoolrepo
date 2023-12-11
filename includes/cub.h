@@ -6,7 +6,7 @@
 /*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:48:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 18:53:28 by audrye           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:09:57 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "getters.h"
 # include "game.h"
 # include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"
@@ -32,5 +33,8 @@
 # define MAGENTA "\x1b[35m"
 # define CYAN    "\x1b[36m"
 # define RESET   "\x1b[0m"
+
+# define WIDTH   800
+# define HEIGHT  600
 
 #endif

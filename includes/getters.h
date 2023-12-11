@@ -6,7 +6,7 @@
 /*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 18:45:31 by audrye           ###   ########.fr       */
+/*   Updated: 2023/12/11 19:29:46 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define GETTERS_H
 
 # include <unistd.h>
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 
 /*********************************/
 /*            structs            */
@@ -26,6 +28,7 @@ typedef struct s_fd			t_fd;
 typedef struct s_player		t_player;
 typedef struct s_data		t_data;
 typedef struct s_ptr		t_ptr;
+typedef float t_v2f __attribute__ ((vector_size (8)));
 
 struct s_pars_map{
 	char	*line;
@@ -43,10 +46,10 @@ struct s_textures{
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
-	void	*no_img;
-	void	*so_img;
-	void	*we_img;
-	void	*ea_img;
+	t_img	*no_img;
+	t_img	*so_img;
+	t_img	*we_img;
+	t_img	*ea_img;
 	t_color	*floor;
 	t_color	*ceiling;
 } ;
@@ -65,6 +68,7 @@ struct s_player{
 	int		posX;
 	int		posY;
 	int		startDir;
+	// double
 } ;
 
 struct s_data{
@@ -77,8 +81,13 @@ struct s_data{
 struct s_ptr{
 	void	*mlx;
 	void	*win;
+	t_img	*img;
 } ;
 
+struct s_maths{
+	float	x;
+	float	y;
+} ;
 
 /*********************************/
 /*            getters            */
