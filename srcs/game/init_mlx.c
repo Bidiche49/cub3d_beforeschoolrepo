@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:50:28 by audrye            #+#    #+#             */
-/*   Updated: 2023/12/12 20:05:22 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/12 21:37:08 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,11 @@ void	mlx_loop_init()
 	(*data)->ptr->img = mlx_new_image((*data)->ptr->mlx, 900, 600);
 	(*data)->ptr->img->data = mlx_get_data_addr((*data)->ptr->img, &(*data)->ptr->img->bpp,
 		&(*data)->ptr->img->size_line, &(*data)->ptr->img->type);
-	//CHECK FOR IMAGE ERROR
-	mlx_key_hook((*data)->ptr->win, deal_key, (*data));
+	if (!(*data)->ptr->img->data)
+		error(ERR_PTR_WIN_KO, NULL, MLX_KO);
 	fill_texture(data);
-	//appel de raycasting ici.
-	// mlx_hook((*data)->ptr->win, 17, 1, error, (*data));
 	mlx_loop_hook((*data)->ptr->mlx, &game_loop, *data);
+	mlx_hook((*data)->ptr->win, KeyPress, KeyPressMask, &deal_key, (*data));
 	mlx_loop((*data)->ptr->mlx);
 }
 
