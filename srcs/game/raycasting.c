@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:58:50 by audrye            #+#    #+#             */
-/*   Updated: 2023/12/11 20:34:24 by audrye           ###   ########.fr       */
+/*   Updated: 2023/12/12 18:06:40 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,59 +143,94 @@ void	put_grid(t_img *img, int cell_dim, int color)
 	}
 }
 
+float distance_to_next_edge(float posX, float posY, float dirX, float dirY) {
+	float const	tx1 = (((int)posX) - 0.000001f - posX) / dirX;
+	float const	tx2 = (((int)posX) + 1.000001f - posX) / dirX;
+	float const	ty1 = (((int)posY) - 0.000001f - posY) / dirY;
+	float const	ty2 = (((int)posY) + 1.000001f - posY) / dirY;
+
+	float tmin = fmax(fmin(tx1, tx2), fmin(ty1, ty2));
+	float tmax = fmin(fmax(tx1, tx2), fmax(ty1, ty2));
+
+	if (tmin < 0.0f)
+		return (tmax);
+	return (tmin);
+}
+
+
 float	shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y)
 {
-	int		iterations;
+	float		dist;
+	float		dist_tot;
+	int			iter;
 
-	dir_x *= 0.001f;
-	dir_y *= 0.001f;
-	iterations = 0;
-	while (iterations < 100000)
+	dist_tot = 0.0f;
+	iter = 0;
+	while (iter < 20 && data->map[(int)pos_y][(int)pos_x] != '1')
 	{
-		pos_x += dir_x;
-		pos_y += dir_y;
-		if (data->map[(int)pos_y][(int)pos_x] == '1')
-			return (iterations * 0.001f);
-		++iterations;
+		dist = distance_to_next_edge(pos_x, pos_y, dir_x, dir_y);
+
+		pos_x += dir_x * dist;
+		pos_y += dir_y * dist;
+		dist_tot += dist;
+		++iter;
 	}
-	return (iterations * 0.001f);
+	return (dist_tot);
 }
 
-void put_wall(t_data *data, int pix_x, int pix_y, float dist)
-{
-
-	// (void)dist;
-    float texture_x = ((float)pix_x / ((float)data->ptr->img->width / dist));
-    float texture_y = ((float)pix_y / ((float)data->ptr->img->height / dist));
-
-    int texture_coord_x = texture_x * (data->textures->we_img->width);
-    int texture_coord_y = texture_y * (data->textures->we_img->height);
-
-    int coord = texture_coord_y * data->textures->we_img->size_line + texture_coord_x * (data->textures->we_img->bpp / 8);
-
-    int const r = data->textures->we_img->data[coord];
-    int const g = data->textures->we_img->data[coord + 1];
-    int const b = data->textures->we_img->data[coord + 2];
-
-    put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
-}
-
-// void	put_wall(t_data *data, int pix_x, int pix_y, float dist)
+// float	shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y)
 // {
-// 	// int const	r = 0xc7 / dist;
-// 	// int const	g = 0x64 / dist;
-// 	// int const	b = 0x64 / dist;
-// 	(void)dist;
-// 	// t_img *img = data->textures->so_img;
-// 	// printf("test\n");
-// 	int	coord = pix_y * data->textures->we_img->size_line + pix_x * (data->textures->we_img->bpp / 8);
+// 	int		iterations;
 
-// 	int const	r = data->textures->we_img->data[coord];
-// 	int const	g = data->textures->we_img->data[coord + 1];
-// 	int const	b = data->textures->we_img->data[coord + 2];
-
-// 	put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
+// 	dir_x *= 0.001f;
+// 	dir_y *= 0.001f;
+// 	iterations = 0;
+// 	while (iterations < 100000)
+// 	{
+// 		pos_x += dir_x;
+// 		pos_y += dir_y;
+// 		if (data->map[(int)pos_y][(int)pos_x] == '1')
+// 			return (iterations * 0.001f);
+// 		++iterations;
+// 	}
+// 	return (iterations * 0.001f);
 // }
+
+// void put_wall(t_data *data, int pix_x, int pix_y, float dist)
+// {
+
+// 	// (void)dist;
+//     float texture_x = ((float)pix_x / ((float)data->ptr->img->width / dist));
+//     float texture_y = ((float)pix_y / ((float)data->ptr->img->height / dist));
+
+//     int texture_coord_x = texture_x * (data->textures->we_img->width);
+//     int texture_coord_y = texture_y * (data->textures->we_img->height);
+
+//     int coord = texture_coord_y * data->textures->we_img->size_line + texture_coord_x * (data->textures->we_img->bpp / 8);
+
+//     int const r = data->textures->we_img->data[coord];
+//     int const g = data->textures->we_img->data[coord + 1];
+//     int const b = data->textures->we_img->data[coord + 2];
+
+//     put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
+// }
+
+void	put_wall(t_data *data, int pix_x, int pix_y, float dist)
+{
+	float const	rdist = fmax(dist, 1.f);
+	int const	r = 0xc7 / rdist;
+	int const	g = 0x64 / rdist;
+	int const	b = 0x64 / rdist;
+	// t_img *img = data->textures->so_img;
+	// printf("test\n");
+	// int	coord = pix_y * data->textures->we_img->size_line + pix_x * (data->textures->we_img->bpp / 8);
+
+	// int const	r = data->textures->we_img->data[coord];
+	// int const	g = data->textures->we_img->data[coord + 1];
+	// int const	b = data->textures->we_img->data[coord + 2];
+
+	put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
+}
 
 void	put_color(t_data *data, int pix_x, int pix_y, t_color *color)
 {
@@ -243,6 +278,25 @@ void	plage_shoot(t_data *data, float pos_x, float pos_y, float rot)
 	}
 }
 
+void	put_blocks(t_data *data, int cell_dim, int color)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (data->map[y])
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if (data->map[y][x] == '1')
+				put_circle(data->ptr->img, x * cell_dim + cell_dim / 2, y * cell_dim + cell_dim / 2, cell_dim / 2, color);
+			++x;
+		}
+		++y;
+	}
+}
+
 void	print_column(t_data *data)
 {
 	static float rot = 2.2f;
@@ -255,10 +309,10 @@ void	print_column(t_data *data)
 
 	clear_img(data->ptr->img, 0x040014);
 	// put_grid(data->ptr->img, cell_size, 0x71758A);
-
+	// put_blocks(data, cell_size, 0xF800E5);
 	 // utilister la position du joueur par rapport a sa position dans la map
 	// put_circle(data->ptr->img, posx * cell_size,posy * cell_size, 10, 0x64c700);
-	// shoot_ray(data, cell_size, posx, posy, dir_x, dir_y);
+	// shoot_ray(data, posx, posy, dir_x, dir_y, cell_size);
 	plage_shoot(data, posx, posy,rot);
 	rot += 0.001f;
 }
