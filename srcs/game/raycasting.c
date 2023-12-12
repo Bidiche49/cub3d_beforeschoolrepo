@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:58:50 by audrye            #+#    #+#             */
-/*   Updated: 2023/12/12 20:01:10 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/12 21:44:07 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ float distance_to_next_edge(float posX, float posY, float dirX, float dirY) {
 	return (tmin);
 }
 
-
 float	shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y)
 {
 	float		dist;
@@ -175,6 +174,7 @@ float	shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y
 		dist_tot += dist;
 		++iter;
 	}
+	// printf("dist_tot = %f\n", dist_tot);
 	return (dist_tot);
 }
 
@@ -196,41 +196,72 @@ float	shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y
 // 	return (iterations * 0.001f);
 // }
 
-// void put_wall(t_data *data, int pix_x, int pix_y, float dist)
+int put_wall(t_data *data, int pix_x, int wall_start, int wall_end, int wall_size)
+{
+	t_img *current_texture = data->textures->we_img;  // Utilisez la texture que vous souhaitez afficher
+
+    float texture_x = ((float)pix_x / (float)data->ptr->img->width);  // Normalisez la position x de la texture
+    int texture_coord_x = texture_x * current_texture->width;
+
+    float texture_y_start = 0.0f;
+    float texture_y_end = 1.0f;
+
+    float texture_y_step = (texture_y_end - texture_y_start) / wall_size;
+
+    float current_texture_y = texture_y_start;
+
+    while (wall_start < wall_end)
+    {
+        int texture_coord_y = current_texture_y * current_texture->height;
+
+        int coord = texture_coord_y * current_texture->size_line + texture_coord_x * (current_texture->bpp / 8);
+
+        int const r = current_texture->data[coord];
+        int const g = current_texture->data[coord + 1];
+        int const b = current_texture->data[coord + 2];
+
+        put_pixel(data->ptr->img, pix_x, wall_start, (r << 16) | (g << 8) | b);
+
+        current_texture_y += texture_y_step;
+        ++wall_start;
+    }
+	return (wall_size);
+}
+
+// int put_wall(t_data *data, int pix_x, int wall_start, int wall_end, int wall_size)
 // {
+//     while (wall_start < wall_end)
+//     {
+//         float texture_y = ((float)(wall_start - wall_start) / (float)wall_size); // Normalisez la position y de la texture
+//         int texture_coord_y = texture_y * (data->textures->we_img->height);
 
-// 	// (void)dist;
-//     float texture_x = ((float)pix_x / ((float)data->ptr->img->width / dist));
-//     float texture_y = ((float)pix_y / ((float)data->ptr->img->height / dist));
+//         int coord = texture_coord_y * data->textures->we_img->size_line + pix_x * (data->textures->we_img->bpp / 8);
 
-//     int texture_coord_x = texture_x * (data->textures->we_img->width);
-//     int texture_coord_y = texture_y * (data->textures->we_img->height);
+//         int const r = data->textures->we_img->data[coord];
+//         int const g = data->textures->we_img->data[coord + 1];
+//         int const b = data->textures->we_img->data[coord + 2];
 
-//     int coord = texture_coord_y * data->textures->we_img->size_line + texture_coord_x * (data->textures->we_img->bpp / 8);
-
-//     int const r = data->textures->we_img->data[coord];
-//     int const g = data->textures->we_img->data[coord + 1];
-//     int const b = data->textures->we_img->data[coord + 2];
-
-//     put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
+//         put_pixel(data->ptr->img, pix_x, wall_start, (r << 16) | (g << 8) | b);
+//         ++wall_start;
+//     }
+//     return wall_size;
 // }
 
-void	put_wall(t_data *data, int pix_x, int pix_y, float dist)
-{
-	float const	rdist = fmax(dist, 1.f);
-	int const	r = 0xc7 / rdist;
-	int const	g = 0x64 / rdist;
-	int const	b = 0x64 / rdist;
-	// t_img *img = data->textures->so_img;
-	// printf("test\n");
-	// int	coord = pix_y * data->textures->we_img->size_line + pix_x * (data->textures->we_img->bpp / 8);
+// void	put_wall(t_data *data, int pix_x, int pix_y, float dist)
+// {
+// 	float const	rdist = fmax(dist, 1.f);
+// 	int const	r = 0xc7 / rdist;
+// 	int const	g = 0x64 / rdist;
+// 	int const	b = 0x64 / rdist;
+// 	// t_img *img = data->textures->so_img;
+// 	// int	coord = pix_y * data->textures->we_img->size_line + pix_x * (data->textures->we_img->bpp / 8);
 
-	// int const	r = data->textures->we_img->data[coord];
-	// int const	g = data->textures->we_img->data[coord + 1];
-	// int const	b = data->textures->we_img->data[coord + 2];
+// 	// int const	r = data->textures->we_img->data[coord];
+// 	// int const	g = data->textures->we_img->data[coord + 1];
+// 	// int const	b = data->textures->we_img->data[coord + 2];
 
-	put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
-}
+// 	put_pixel(data->ptr->img, pix_x, pix_y, (r << 16) | (g << 8) | b);
+// }
 
 void	put_color(t_data *data, int pix_x, int pix_y, t_color *color)
 {
@@ -244,13 +275,14 @@ void	put_slice(t_data *data, int pix_x, float dist)
 	int	wall_start = data->ptr->img->height / 2 - wall_size / 2;
 	int	wall_end = wall_start + wall_size;
 
+
 	pix_y = 0;
 	while (pix_y < data->ptr->img->height)
 	{
 		if (pix_y < wall_start)
 			put_color(data, pix_x, pix_y, data->textures->ceiling);
 		else if (pix_y < wall_end)
-			put_wall(data, pix_x, pix_y, dist);
+			pix_y += put_wall(data, pix_x, wall_start, wall_end, wall_size);
 		else
 			put_color(data, pix_x, pix_y, data->textures->floor);
 		++pix_y;
@@ -278,24 +310,24 @@ void	plage_shoot(t_data *data, float pos_x, float pos_y, float rot)
 	}
 }
 
-void	put_blocks(t_data *data, int cell_dim, int color)
-{
-	int	x;
-	int	y;
+// void	put_blocks(t_data *data, int cell_dim, int color)
+// {
+// 	int	x;
+// 	int	y;
 
-	y = 0;
-	while (data->map[y])
-	{
-		x = 0;
-		while (data->map[y][x])
-		{
-			if (data->map[y][x] == '1')
-				put_circle(data->ptr->img, x * cell_dim + cell_dim / 2, y * cell_dim + cell_dim / 2, cell_dim / 2, color);
-			++x;
-		}
-		++y;
-	}
-}
+// 	y = 0;
+// 	while (data->map[y])
+// 	{
+// 		x = 0;
+// 		while (data->map[y][x])
+// 		{
+// 			if (data->map[y][x] == '1')
+// 				put_circle(data->ptr->img, x * cell_dim + cell_dim / 2, y * cell_dim + cell_dim / 2, cell_dim / 2, color);
+// 			++x;
+// 		}
+// 		++y;
+// 	}
+// }
 
 void	print_column(t_data *data)
 {
