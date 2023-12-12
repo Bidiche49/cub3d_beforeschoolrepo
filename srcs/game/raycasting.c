@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:58:50 by audrye            #+#    #+#             */
-/*   Updated: 2023/12/12 18:06:40 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/12 20:01:10 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,6 @@ void	put_blocks(t_data *data, int cell_dim, int color)
 
 void	print_column(t_data *data)
 {
-	static float rot = 2.2f;
 	float const	posx = data->player.posX; // data->player.pos_x
 	float const	posy = data->player.posY;
 	// float const	dir_x = sinf(rot);
@@ -313,6 +312,5 @@ void	print_column(t_data *data)
 	 // utilister la position du joueur par rapport a sa position dans la map
 	// put_circle(data->ptr->img, posx * cell_size,posy * cell_size, 10, 0x64c700);
 	// shoot_ray(data, posx, posy, dir_x, dir_y, cell_size);
-	plage_shoot(data, posx, posy,rot);
-	rot += 0.001f;
+	plage_shoot(data, posx, posy, data->player.dir);
 }

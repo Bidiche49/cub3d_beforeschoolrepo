@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:50:28 by audrye            #+#    #+#             */
-/*   Updated: 2023/12/11 19:38:56 by audrye           ###   ########.fr       */
+/*   Updated: 2023/12/12 20:05:22 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,14 @@ void	fill_texture(t_data **data)
 
 int	deal_key(int key, t_data *data)
 {
-	(void)data;
+	if (key == XK_a || key == XK_A)
+		mouv_press_a(data);
+	if (key == XK_d || key == XK_D)
+		mouv_press_d(data);
+	if (key == XK_w || key == XK_W)
+		mouv_press_w(data);
+	if (key == XK_s || key == XK_S)
+		mouv_press_s(data);
 	if (key == XK_Escape)
 		exit_game(NULL);
 	return (key);
@@ -62,10 +69,10 @@ void	mlx_loop_init()
 	(*data)->ptr->mlx = mlx_init();
 	if (!(*data)->ptr->mlx)
 		error(ERR_PTR_MLX_KO, NULL, MLX_KO);
-	(*data)->ptr->win = mlx_new_window((*data)->ptr->mlx, 400, 400, "cub3D");
+	(*data)->ptr->win = mlx_new_window((*data)->ptr->mlx, 900, 600, "cub3D");
 	if (!(*data)->ptr->win)
 		error(ERR_PTR_WIN_KO, NULL, MLX_KO);
-	(*data)->ptr->img = mlx_new_image((*data)->ptr->mlx, 400, 400);
+	(*data)->ptr->img = mlx_new_image((*data)->ptr->mlx, 900, 600);
 	(*data)->ptr->img->data = mlx_get_data_addr((*data)->ptr->img, &(*data)->ptr->img->bpp,
 		&(*data)->ptr->img->size_line, &(*data)->ptr->img->type);
 	//CHECK FOR IMAGE ERROR

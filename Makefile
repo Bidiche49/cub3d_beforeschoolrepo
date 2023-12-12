@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: audrye <audrye@student.42.fr>              +#+  +:+       +#+         #
+#    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/12/08 16:17:04 by audrye           ###   ########.fr        #
+#    Updated: 2023/12/12 20:02:00 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ FILES_PARS =	$(PARS_PATH)parsing.c				\
 
 FILES_GAME =	$(GAME_PATH)init_mlx.c				\
 				$(GAME_PATH)exit.c					\
+				$(GAME_PATH)mouv.c					\
 				$(GAME_PATH)raycasting.c
 
 SRCS =			$(SRCS_PATH)cub.c					\

@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 13:16:23 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 13:26:53 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/12 20:01:10 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	print_data(void)
 	while (data->map[y])
 		printf("%s\n", data->map[y++]);
 	printf("\nPLAYER :\n");
-	printf("posX : %d\n", data->player.posX);
-	printf("posY : %d\n", data->player.posY);
-	printf("direction : %c\n", data->player.startDir);
+	printf("posX : %f\n", data->player.posX);
+	printf("posY : %f\n", data->player.posY);
+	printf("direction : %f\n", data->player.dir);
 	printf("\nTEXTURES PATHS :\n");
 	printf("north : %s\n", data->textures->no_path);
 	printf("south : %s\n", data->textures->so_path);

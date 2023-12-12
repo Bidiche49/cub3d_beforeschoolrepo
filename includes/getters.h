@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getters.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/11 19:29:46 by audrye           ###   ########.fr       */
+/*   Updated: 2023/12/12 20:00:26 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ struct s_fd{
 } ;
 
 struct s_player{
-	int		posX;
-	int		posY;
-	int		startDir;
+	float		posX;
+	float		posY;
+	float		dir;
 	// double
 } ;
 
