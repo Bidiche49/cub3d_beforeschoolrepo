@@ -6,7 +6,7 @@
 /*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 17:55:50 by audrye           ###   ########.fr       */
+/*   Updated: 2023/12/12 17:36:36 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ void	init_data(void)
 	(*textures) = new;
 }
 
+t_player	dir_player(char **map, int x, int y, t_player player)
+{
+	if (map[y][x] == 'N')
+		return (player.Dir = M_PI, player);
+	else if (map[y][x] == 'S')
+		return (player.Dir = 0.0f, player);
+	else if (map[y][x] == 'E')
+		return (player.Dir = M_PI / 2, player);
+	else if (map[y][x] == 'W')
+		return (player.Dir = ((M_PI / 2) * -1), player);
+	return (player);
+}
+
 t_player	fill_player(char **map)
 {
 	int			x;
@@ -67,19 +80,20 @@ t_player	fill_player(char **map)
 		{
 			if (is_player(map[y][x]))
 			{
-				player.startDir = map[y][x];
-				player.posX = x;
-				player.posY = y;
+				player.Dir = map[y][x];
+				player.posX = (int)x;
+				player.posY = (int)y;
 				return (player);
 			}
 			x++;
 		}
 		y++;
 	}
-	player.startDir = map[y][x];
+	dir_player(map, x, y, player);
 	player.posX = x;
 	player.posY = y;
-	return (player);}
+	return (player);
+}
 
 void	fill_data(void)
 {
