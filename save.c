@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:58:50 by audrye            #+#    #+#             */
-/*   Updated: 2023/12/13 05:44:51 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/13 02:13:34 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,11 +196,11 @@ float	shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y
 // 	return (iterations * 0.001f);
 // }
 
-int put_wall(t_data *data, int pix_x, int wall_start, int wall_end, int wall_size, int x, t_face face)
+int put_wall(t_data *data, int pix_x, int wall_start, int wall_end, int wall_size)
 {
-	t_img *current_texture = data->textures->we_img;
+	t_img *current_texture = data->textures->we_img;  // Utilisez la texture que vous souhaitez afficher
 
-    float texture_x = ((float)x / (float)face.wall_width);
+    float texture_x = ((float)pix_x / (float)data->ptr->img->width);  // Normalisez la position x de la texture
     int texture_coord_x = texture_x * current_texture->width;
 
     float texture_y_start = 0.0f;
@@ -289,71 +289,50 @@ void	put_color(t_data *data, int pix_x, int pix_y, t_color *color)
 // 	}
 // }
 
-// void	put_slice(t_data *data, int pix_x, int wall_size)
-// {
-// 	int	pix_y;
-// 	int	wall_start = data->ptr->img->height / 2 - wall_size / 2;
-// 	int	wall_end = wall_start + wall_size;
+void	put_slice(t_data *data, int pix_x, int wall_size)
+{
+	int	pix_y;
+	int	wall_start = data->ptr->img->height / 2 - wall_size / 2;
+	int	wall_end = wall_start + wall_size;
 
-// 	pix_y = 0;
-// 	while (pix_y < data->ptr->img->height)
-// 	{
-// 		if (pix_y < wall_start)
-// 			put_color(data, pix_x, pix_y, data->textures->ceiling);
-// 		else if (pix_y < wall_end)
-// 			pix_y += put_wall(data, pix_x, wall_start, wall_end, wall_size);
-// 		else
-// 			put_color(data, pix_x, pix_y, data->textures->floor);
-// 		++pix_y;
-// 	}
-// }
+
+	pix_y = 0;
+	while (pix_y < data->ptr->img->height)
+	{
+		if (pix_y < wall_start)
+			put_color(data, pix_x, pix_y, data->textures->ceiling);
+		else if (pix_y < wall_end)
+			pix_y += put_wall(data, pix_x, wall_start, wall_end, wall_size);
+		else
+			put_color(data, pix_x, pix_y, data->textures->floor);
+		++pix_y;
+	}
+}
 
 int	calc_wall_height(int x, t_face face)
 {
 	int	hp;
-	// float tetard;
-	// float m;
 
-	// tetard = face.end_wall_height - face.start_wall_height;
-	// m = tetard / face.wall_width;
-	// hp = face.start_wall_height + m * (x -1);
 	if (x == 0)
 		return (face.start_wall_height);
 	if (x == face.wall_width)
 		return (face.end_wall_height);
 	hp = face.start_wall_height + (((face.end_wall_height - face.start_wall_height) * x) / face.wall_width);
-	printf("hp = %d\n", hp);
 	return (hp);
 }
 
 int	put_face(t_data *data, int pix_x, t_face face)
 {
-	int	pix_y;
 	int	x;
-	int	wall_start;
-	int	wall_end;
 
 	x = 0;
-	// printf("start wall = %d end wall =%d\n",face.start_wall_height , face.end_wall_height );
-	while (x <= face.wall_width && pix_x < data->ptr->img->width)
+	while (x < face.wall_width && pix_x < data->ptr->img->width)
 	{
-		wall_start = data->ptr->img->height / 2 - calc_wall_height(x, face) / 2;
-		wall_end = wall_start + calc_wall_height(x, face);
-		pix_y = 0;
-		while (pix_y < data->ptr->img->height)
-		{
-			if (pix_y < wall_start)
-				put_color(data, pix_x + x, pix_y, data->textures->ceiling);
-			else if (pix_y < wall_end)
-				pix_y += put_wall(data, pix_x + x, wall_start, wall_end, calc_wall_height(x, face), x, face);
-			else
-				put_color(data, pix_x + x, pix_y, data->textures->floor);
-			pix_y++;
-		}
+		put_slice(data, pix_x, calc_wall_height(x, face));
 		x++;
-		// printf("pix_x = %d\n", pix_x);
+		pix_x++;
 	}
-	return (x);
+	return (pix_x);
 }
 
 int	print_face(t_data *data, float pos_x, float pos_y, float *start_rot, float off_rot, int pix_x)
@@ -388,9 +367,9 @@ int	print_face(t_data *data, float pos_x, float pos_y, float *start_rot, float o
 		iter++;
 	}
 	face.end_wall_height = data->ptr->img->height / face.old_dist;
-	face.wall_width = iter -1; // NE DONNE PAS LE NOMBRE DE PIXEL !!!!!!!!!!!!!!!!!!!!!!!!!!
+	face.wall_width = iter - 1;
 
-	// printf("startheigjt = %d | end_height = %d | width = %d\n",face.start_wall_height, face.end_wall_height, face.wall_width);
+	printf("startheigjt = %d | end_height = %d | width = %d\n",face.start_wall_height, face.end_wall_height, face.wall_width);
 	return (put_face(data, pix_x, face));
 }
 
@@ -407,9 +386,10 @@ void	plage_shoot(t_data *data, float pos_x, float pos_y, float rot)
 	pix_x = 0;
 	while (pix_x < data->ptr->img->width)
 	{
-
+		// start_rot = start_rot + off_rot;
+		// put_slice(data, pix_x, shoot_ray(data, pos_x, pos_y, dir_x, dir_y));
 		pix_x += print_face(data, pos_x, pos_y, &start_rot, off_rot, pix_x);
-		// printf("after pix_x = %d\n", pix_x);
+		// printf("pix_x = %d\n", pix_x);
 	}
 }
 
