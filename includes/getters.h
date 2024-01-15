@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getters.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/12 20:00:26 by ntardy           ###   ########.fr       */
+/*   Updated: 2023/12/13 03:36:33 by audrye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ struct s_maths{
 	float	x;
 	float	y;
 } ;
+
+// struct s_cube{
+// 	float	cube_start_height;
+// 	float	cube_end_height;
+// 	float	cube_lenght
+// } ;
 
 /*********************************/
 /*            getters            */
