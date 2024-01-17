@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/13 00:13:48 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/17 14:47:08 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,11 @@ struct s_maths{
 struct s_face{
 	int		start_wall_height;
 	int		end_wall_height;
+	float	start_wall_width;
+	float	end_wall_width;
 	int		wall_width;
-	int		pos_wall_x;
-	int		pos_wall_y;
+	float	pos_wall_x;
+	float	pos_wall_y;
 	float	old_dist;
 	float	dist;
 } ;
