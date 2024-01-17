@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/17 14:47:08 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/17 20:02:10 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_player		t_player;
 typedef struct s_data		t_data;
 typedef struct s_ptr		t_ptr;
 typedef struct s_face		t_face;
+typedef struct s_additional	t_additional;
 typedef float t_v2f __attribute__ ((vector_size (8)));
 
 struct s_pars_map{
@@ -100,6 +101,15 @@ struct s_face{
 	float	pos_wall_y;
 	float	old_dist;
 	float	dist;
+} ;
+
+struct s_additional{
+	float		start_rot;
+	float		dir;
+	float		off_rot;
+	float		current_angle;
+	float		deviation_angle;
+	// double
 } ;
 
 /*********************************/

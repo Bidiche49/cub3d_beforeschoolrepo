@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/12 20:01:10 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/17 19:01:59 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	init_data(void)
 	(*textures) = new;
 }
 
-t_player	dir_player(char **map, int x, int y, t_player player)
+float	dir_player(char **map, int x, int y)
 {
 	if (map[y][x] == 'N')
-		return (player.dir = M_PI, player);
-	else if (map[y][x] == 'S')
-		return (player.dir = 0.0f, player);
+		return (M_PI);
 	else if (map[y][x] == 'E')
-		return (player.dir = M_PI / 2, player);
+		return (M_PI / 2);
+	else if (map[y][x] == 'S')
+		return (0.0f);
 	else if (map[y][x] == 'W')
-		return (player.dir = ((M_PI / 2) * -1), player);
-	return (player);
+		return (((M_PI / 2) * -1));
+	return (0.5);
 }
 
 t_player	fill_player(char **map)
@@ -80,7 +80,7 @@ t_player	fill_player(char **map)
 		{
 			if (is_player(map[y][x]))
 			{
-				player.dir = map[y][x];
+				player.dir = dir_player(map, x, y);
 				player.posX = (float)x + 0.5f;
 				player.posY = (float)y + 0.5f;
 				return (player);
@@ -89,7 +89,7 @@ t_player	fill_player(char **map)
 		}
 		y++;
 	}
-	dir_player(map, x, y, player);
+	player.dir = dir_player(map, x, y);
 	player.posX = x;
 	player.posY = y;
 	return (player);
