@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:58:50 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/17 20:12:55 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/17 21:00:49 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,26 @@ float distance_to_next_edge(float posX, float posY, float dirX, float dirY)
 	return (tmin);
 }
 
-float shoot_ray(t_data *data, float pos_x, float pos_y, float dir_x, float dir_y, t_face *face, float deviation_angle)
+float shoot_ray(t_data *data, t_face *face, t_extra extra)
 {
+	float pos_x;
+	float pos_y;
 	float dist_tot = 0.0f;
 	int iter = 0;
+
+	pos_x = data->player.posX;
+	pos_y = data->player.posY;
 	while (iter < 20 && data->map[(int)pos_y][(int)pos_x] != '1') {
-		float dist = distance_to_next_edge(pos_x, pos_y, dir_x, dir_y);
-		pos_x += dir_x * dist;
-		pos_y += dir_y * dist;
+		float dist = distance_to_next_edge(pos_x, pos_y, extra.dir_x, extra.dir_y);
+		pos_x += extra.dir_x * dist;
+		pos_y += extra.dir_y * dist;
 		dist_tot += dist;
 		++iter;
 	}
 	face->pos_wall_x = pos_x;
 	face->pos_wall_y = pos_y;
 
-	return (dist_tot * cosf(deviation_angle));
+	return (dist_tot * cosf(extra.deviation_angle));
 }
 
 
@@ -136,69 +141,69 @@ int	put_face(t_data *data, int pix_x, t_face face)
 	return (x);
 }
 
-int print_face(t_data *data, float pos_x, float pos_y, float *start_rot, float off_rot, int pix_x, float deviation_angle)
+int compass(t_face *face, t_data *data, t_extra extra)
+{
+
+	face->dist = shoot_ray(data, face, extra);
+	if (face->pos_wall_x - (int)face->pos_wall_x == 0)//East
+		face->start_wall_width = face->pos_wall_y * -1;
+	else if (face->pos_wall_y < data->player.posY && face->pos_wall_y - (int)face->pos_wall_y > 0.999)//North
+		face->start_wall_width = face->pos_wall_x * -1;
+	else if (face->pos_wall_y > data->player.posY && face->pos_wall_y - (int)face->pos_wall_y < 0.001)//South
+		face->start_wall_width = face->pos_wall_x;
+	else//West
+		face->start_wall_width = face->pos_wall_y;
+	return (0);
+}
+
+void pos_wall(t_face face, t_extra *extra)
+{
+	extra->pos_wall_y = face.pos_wall_y;
+	extra->pos_wall_x = face.pos_wall_x;
+}
+
+int print_face(t_data *data, float *current_angle, t_extra extra, int pix_x)
 {
 	t_face	face;
-	float	pos_wall_x;
-	float	pos_wall_y;
 	int		iter;
-	float	dir_x;
-	float	dir_y;
 
-	(void)dir_x;
-	(void)dir_y;
-	face.dist = shoot_ray(data, pos_x, pos_y, sinf(*start_rot), cosf(*start_rot), &face, deviation_angle);
-	pos_wall_y = face.pos_wall_y;
-	pos_wall_x = face.pos_wall_x;
-	iter = 0;
-	if (face.pos_wall_x - (int)face.pos_wall_x == 0)//East
-		face.start_wall_width = face.pos_wall_y * -1;
-	else if (face.pos_wall_y < data->player.posY && face.pos_wall_y - (int)face.pos_wall_y > 0.999)//North
-		face.start_wall_width = face.pos_wall_x * -1;
-	else if (face.pos_wall_y > data->player.posY && face.pos_wall_y - (int)face.pos_wall_y < 0.001)//South
-		face.start_wall_width = face.pos_wall_x;
-	else//West
-		face.start_wall_width = face.pos_wall_y;
+	extra.dir_x = sinf(*current_angle);
+	extra.dir_y = cosf(*current_angle);
+	iter = compass(&face, data, extra);
+	pos_wall(face, &extra);
 	face.start_wall_height = data->ptr->img->height / face.dist;
-	while (pos_wall_y == face.pos_wall_y && pos_wall_x == face.pos_wall_x && iter < data->ptr->img->width)
+	while (extra.pos_wall_y == face.pos_wall_y && extra.pos_wall_x == face.pos_wall_x && iter < data->ptr->img->width)
 	{
-		*start_rot = *start_rot + off_rot;
-		dir_x = sinf(*start_rot);
-		dir_y = cosf(*start_rot);
+		*current_angle = *current_angle + extra.off_rot;
+		extra.dir_x = sinf(*current_angle);
+		extra.dir_y = cosf(*current_angle);
 		face.old_dist = face.dist;
-		 face.dist = shoot_ray(data, pos_x, pos_y, sinf(*start_rot), cosf(*start_rot), &face, deviation_angle);
-		if (pos_wall_x == 0 && pos_wall_y == 0)
-		{
-			pos_wall_x = face.pos_wall_x;
-			pos_wall_y = face.pos_wall_y;
-		}
+		face.dist = shoot_ray(data, &face, extra);
+		if (extra.pos_wall_x == 0 && extra.pos_wall_y == 0)
+			pos_wall(face, &extra);
 		iter++;
 	}
-	face.end_wall_width = face.pos_wall_x;
 	face.end_wall_height = data->ptr->img->height / face.old_dist;
 	face.wall_width = iter -1;
-
 	return (put_face(data, pix_x, face));
 }
 
 
-void	plage_shoot(t_data *data, float pos_x, float pos_y, float rot) {
+void	plage_shoot(t_data *data, float rot) {
+	t_extra extra;
 	int pix_x = 0;
-	float start_rot = rot - 0.15f * M_PI;
-	float off_rot = (0.3f * M_PI) / data->ptr->img->width;
+	extra.start_rot = rot - 0.15f * M_PI;
+	extra.off_rot = (0.3f * M_PI) / data->ptr->img->width;
 
 	while (pix_x < data->ptr->img->width) {
-		float current_angle = start_rot + pix_x * off_rot;
-		float deviation_angle = fabs(rot - current_angle);
-		pix_x += print_face(data, pos_x, pos_y, &current_angle, off_rot, pix_x, deviation_angle);
+		extra.current_angle = extra.start_rot + pix_x * extra.off_rot;
+		extra.deviation_angle = fabs(rot - extra.current_angle);
+		pix_x += print_face(data, &extra.current_angle, extra, pix_x);
 	}
 }
 
 void	print_column(t_data *data)
 {
-	float const	posx = data->player.posX;
-	float const	posy = data->player.posY;
-
 	clear_img(data->ptr->img, 0x040014);
-	plage_shoot(data, posx, posy, data->player.dir);
+	plage_shoot(data, data->player.dir);
 }
