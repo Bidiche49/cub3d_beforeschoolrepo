@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/22 17:36:17 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/22 20:43:17 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ struct s_data{
 	t_textures	*textures;
 	t_player	player;
 	t_ptr		*ptr;
+	int			cycles_since_last_switch;
+	int			mouse_pos;
 } ;
 
 struct s_ptr{

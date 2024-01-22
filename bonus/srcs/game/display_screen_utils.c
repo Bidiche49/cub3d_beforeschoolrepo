@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:32:13 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/21 18:34:34 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/22 20:43:14 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,33 @@ int	calc_wall_height(int x, t_face face)
 	return (hp);
 }
 
-t_img	*choice_txt(t_textures *textures, t_face face)
+t_img	*choice_normal_texture(t_img *texture, t_textures *textures, t_face face)
 {
-	t_img	*texture;
-
-	if (face.card == NORTH)
-		texture = textures->no_img;
+	// if (face.card == NORTH)
+	// 	texture = textures->no_img;
 	if (face.card == SOUTH)
 		texture = textures->so_img;
 	if (face.card == EAST)
 		texture = textures->ea_img;
 	if (face.card == WEST)
 		texture = textures->we_img;
+	return (texture);
+}
+
+t_img	*choice_txt(t_textures *textures, t_face face)
+{
+	t_img	*texture;
+	t_data	*data;
+
+	texture = NULL;
+	data = *get_data();
+	if (face.card == NORTH) {
+		if (data->cycles_since_last_switch <= 250)
+			texture = textures->nos_img;
+		else
+			texture = textures->no_img;
+	}
+	else
+		texture = choice_normal_texture(texture, textures, face);
 	return (texture);
 }

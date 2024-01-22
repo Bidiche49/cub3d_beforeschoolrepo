@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:44:15 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/22 17:41:34 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/22 18:32:44 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	textures_is_empty(int ref)
 	t_textures	**textures;
 
 	textures = get_textures();
-	if (!(*textures)->no_path || !(*textures)->so_path)
+	if (!(*textures)->no_path || !(*textures)->nos_path
+		|| !(*textures)->so_path)
 		return (1);
 	if (!(*textures)->we_path || !(*textures)->ea_path)
 		return (1);

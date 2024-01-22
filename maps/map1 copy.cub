@@ -1,7 +1,7 @@
-NO ./no_texture.xpm
-SO ./so_texture.xpm
-WE ./we_texture.xpm
-EA ./ea_texture.xpm
+NO ./textures/no_texture.xpm
+SO ./textures/so_texture.xpm
+WE ./textures/we_texture.xpm
+EA ./textures/ea_texture.xpm
 
 
 C 128,145,200

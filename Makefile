@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2024/01/22 16:55:00 by ntardy           ###   ########.fr        #
+#    Updated: 2024/01/22 19:37:17 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ INCLUDE_PATH =	mandory/includes/
 BONUS_SRCS_PATH =		bonus/srcs/
 BONUS_GAME_PATH =		$(BONUS_SRCS_PATH)game/
 BONUS_PARS_PATH =		$(BONUS_SRCS_PATH)parsing/
-BONUS_PARS_PATH =		$(BONUS_SRCS_PATH)getters/
+BONUS_GETTERS_PATH =	$(BONUS_SRCS_PATH)getters/
 BONUS_INCLUDE_PATH =	bonus/includes/
 
 #*********************************#
@@ -97,9 +97,9 @@ BONUS_FILES_GAME =	$(BONUS_GAME_PATH)init_mlx.c				\
 					$(BONUS_GAME_PATH)display_screen_utils.c	\
 					$(BONUS_GAME_PATH)display_screen.c			\
 					$(BONUS_GAME_PATH)raycasting.c				\
-					$(BONUS_GETTERS_PATH)getters.c
 
 BONUS_SRCS =		$(BONUS_SRCS_PATH)cub.c		\
+					$(BONUS_GETTERS_PATH)getters.c\
 					$(BONUS_FILES_PARS)			\
 					$(FILES_GARBAGE)			\
 					$(FILES_UTILS)				\
@@ -107,9 +107,9 @@ BONUS_SRCS =		$(BONUS_SRCS_PATH)cub.c		\
 
 OBJS =			$(SRCS:.c=.o)
 
-BONUS_OBJS =			$(BONUS_SRCS:.c=.o)
+BONUS_OBJS =	$(BONUS_SRCS:.c=.o)
 
-MLX =        -L$(LIB_MLX) -lmlx_Linux -L/usr/lib -I$(LIB_MLX) -lXext -lX11 -lm -lz
+MLX =	-L$(LIB_MLX) -lmlx_Linux -L/usr/lib -I$(LIB_MLX) -lXext -lX11 -lm -lz
 
 # HEADER =		$(INCLUDE_PATH)cub.h				\
 # 				$(INCLUDE_PATH)errors.h				\
@@ -141,13 +141,18 @@ YELLOW	= \033[33m
 #*           TARGETS             *#
 #*********************************#
 
-all: $(NAME)
-
 
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Compiling in progress...$(RESET)"
 	@make -C $(LIB_MLX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE_PATH) -I $(LIB_MLX) $(MLX)
+	@echo "$(GREEN)------------------------$(RESET)"
+	@echo "$(GREEN)$(NAME) is compile !$(RESET)"
+
+$(BONUS_NAME): $(BONUS_OBJS)
+	@echo "$(YELLOW)Compiling in progress...$(RESET)"
+	@make -C $(LIB_MLX)
+	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) -I $(BONUS_INCLUDE_PATH) -I $(LIB_MLX) $(MLX)
 	@echo "$(GREEN)------------------------$(RESET)"
 	@echo "$(GREEN)$(NAME) is compile !$(RESET)"
 
@@ -160,14 +165,9 @@ $(NAME): $(OBJS)
 
 .PHONY: all clean fclean re bonus
 
-bonus: $(BONUS_NAME)
+all: $(NAME)
 
-$(BONUS_NAME): $(BONUS_OBJS)
-	@echo "$(YELLOW)Compiling in progress...$(RESET)"
-	@make -C $(LIB_MLX)
-	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) -I $(BONUS_INCLUDE_PATH) -I $(LIB_MLX) $(MLX)
-	@echo "$(GREEN)------------------------$(RESET)"
-	@echo "$(GREEN)$(NAME) is compile !$(RESET)"
+bonus: $(BONUS_NAME)
 
 clean:
 	@echo "$(YELLOW)Removing object files...$(RESET)"

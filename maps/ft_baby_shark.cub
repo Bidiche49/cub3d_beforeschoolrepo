@@ -1,7 +1,7 @@
-NO ./Shanley.xpm
-SO ./Alex.xpm
-WE ./Aug_chauve.xpm
-EA ./tardy.xpm
+NO ./textures/Shanley.xpm
+SO ./textures/Alex.xpm
+WE ./textures/Aug_chauve.xpm
+EA ./textures/tardy.xpm
 
 
 C 128,145,200

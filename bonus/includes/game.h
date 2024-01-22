@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:50:22 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/22 16:10:25 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/22 20:40:14 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	mouv_press_w(t_data *data);
 void	mouv_press_s(t_data *data);
 void	mouv_press_a(t_data *data);
 void	mouv_press_d(t_data *data);
+int		mouse_move(int x, int y, t_data *data);
 
 //---------------------------------------//
 //				DISPLAY SCREEN			 //

@@ -1,12 +1,11 @@
-NO ./north_texture.xpm
-NOS ./north_sprite.xpm
-SO ./south_texture.xpm
-WE ./west_texture.xpm
-EA ./east_texture.xpm
+NO ./textures/no_texture.xpm
+NOS ./textures/north_sprite.xpm
+SO ./textures/so_texture.xpm
+WE ./textures/we_texture.xpm
+EA ./textures/ea_texture.xpm
 
-
-C 225,30,0
-F 220,100,0
+C 100,100,100
+F 0,0,0
 
 
         111111111111111111111111111
