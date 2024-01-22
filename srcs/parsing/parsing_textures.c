@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:44:15 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 13:47:55 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 18:58:18 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ void	check_line_texture(char *line)
 		textures->we_path = check_texture(start);
 	else if (!ft_strcmp(first_word, "EA") && !textures->ea_path)
 		textures->ea_path = check_texture(start);
-	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "C") && textures->ceiling->b == -1)
+	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "C")
+		&& textures->ceiling->b == -1)
 		convert_rgb(start, textures->ceiling);
-	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "F") && textures->floor->b == -1)
+	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "F")
+		&& textures->floor->b == -1)
 		convert_rgb(start, textures->floor);
 	else
 		error(ERR_PATTERN_FILE, NULL, PARS_KO);
@@ -78,7 +80,8 @@ int	textures_is_empty(int ref)
 		return (1);
 	if (!(*textures)->we_path || !(*textures)->ea_path)
 		return (1);
-	if (ref == 2 && ((*textures)->floor->r == -1 || (*textures)->ceiling->r == -1))
+	if (ref == 2 && ((*textures)->floor->r == -1
+			|| (*textures)->ceiling->r == -1))
 		return (1);
 	return (0);
 }

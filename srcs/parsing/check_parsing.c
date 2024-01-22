@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:47:27 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 14:22:56 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 18:47:57 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_wall_space(char c)
 	return (0);
 }
 
-int is_player(char c)
+int	is_player(char c)
 {
 	if (c == 'S' || c == 'N')
 		return (1);

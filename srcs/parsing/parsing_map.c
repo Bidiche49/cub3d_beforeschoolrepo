@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:54:14 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 16:23:15 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 18:56:29 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ void	fill_map(char *line)
 	current->next = new;
 }
 
-int	is_map_char(char c)
-{
-	if (c == '0')
-		return (1);
-	if (is_player(c))
-		return (1);
-	return (is_wall_space(c));
-}
-
-
 char	**cast_map(void)
 {
 	t_pars_map	*line;
@@ -73,9 +63,9 @@ char	**cast_map(void)
 	return (map);
 }
 
-void	check_empty_line(t_pars_map *map)
+t_pars_map	*check_empty_line_loop(t_pars_map *map)
 {
-	t_pars_map *tmp;
+	t_pars_map	*tmp;
 
 	tmp = NULL;
 	while (map)
@@ -94,6 +84,14 @@ void	check_empty_line(t_pars_map *map)
 		if (map)
 			map = map->next;
 	}
+	return (tmp);
+}
+
+void	check_empty_line(t_pars_map *map)
+{
+	t_pars_map	*tmp;
+
+	tmp = check_empty_line_loop(map);
 	if (tmp)
 	{
 		map = tmp->next;

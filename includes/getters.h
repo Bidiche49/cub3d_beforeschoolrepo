@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/17 21:02:14 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 19:12:52 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ typedef struct s_data		t_data;
 typedef struct s_ptr		t_ptr;
 typedef struct s_face		t_face;
 typedef struct s_extra		t_extra;
-typedef float t_v2f __attribute__ ((vector_size (8)));
 
 struct s_pars_map{
-	char	*line;
+	char		*line;
 	t_pars_map	*next;
 } ;
 
@@ -67,10 +66,9 @@ struct s_fd{
 } ;
 
 struct s_player{
-	float		posX;
-	float		posY;
+	float		posx;
+	float		posy;
 	float		dir;
-	// double
 } ;
 
 struct s_data{
@@ -102,7 +100,7 @@ struct s_face{
 	float	dist;
 	int		wall_start;
 	int		wall_end;
-	int		wall_size;
+	int		card;
 } ;
 
 struct s_extra{
@@ -125,6 +123,5 @@ t_textures		**get_textures(void);
 t_garbage		**get_garbage(void);
 t_fd			**get_fd(void);
 t_data			**get_data(void);
-
 
 #endif

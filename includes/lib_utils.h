@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 17:51:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 01:35:13 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 19:13:05 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ char	*ft_substr(char *s, int start, int len);
 char	**ft_split(char *s, char c);
 
 int		ft_atoi(char *str);
-void    del_pars_map(void);
+void	del_pars_map(void);
 
 #endif

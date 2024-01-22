@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:04:39 by ntardy            #+#    #+#             */
-/*   Updated: 2023/11/30 21:55:46 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 19:00:39 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,15 @@
 /*********************************/
 void			garbage_collect(void);
 void			tracked_free(void *ptr);
-void	        collect_fd(void);
-void	        tracked_close(int fd);
-int             tracked_open(char *str, int arg);
+void			collect_fd(void);
+void			tracked_close(int fd);
+int				tracked_open(char *str, int arg);
+
+typedef enum s_cardinal{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_cardinal;
 
 #endif

@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2023/12/12 20:02:00 by ntardy           ###   ########.fr        #
+#    Updated: 2024/01/22 16:17:38 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,15 @@ FILES_PARS =	$(PARS_PATH)parsing.c				\
 				$(PARS_PATH)parsing_map.c			\
 				$(PARS_PATH)check_parsing_map.c		\
 				$(PARS_PATH)check_parsing.c			\
+				$(PARS_PATH)parsing_utils.c			\
 				$(PARS_PATH)parsing_textures.c
 
 FILES_GAME =	$(GAME_PATH)init_mlx.c				\
 				$(GAME_PATH)exit.c					\
 				$(GAME_PATH)mouv.c					\
+				$(GAME_PATH)mouv_2.c				\
+				$(GAME_PATH)display_screen_utils.c	\
+				$(GAME_PATH)display_screen.c		\
 				$(GAME_PATH)raycasting.c
 
 SRCS =			$(SRCS_PATH)cub.c					\
@@ -67,8 +71,6 @@ SRCS =			$(SRCS_PATH)cub.c					\
 				$(FILES_GARBAGE)					\
 				$(FILES_UTILS)						\
 				$(FILES_GAME)						\
-				$(SRCS_PATH)print_data.c####################TODEL
-
 
 OBJS =			$(SRCS:.c=.o)
 
@@ -98,8 +100,14 @@ all: $(NAME)
 
 
 $(NAME): $(OBJS)
+	@echo "$(YELLOW)Compiling in progress...$(RESET)"
 	@make -C $(LIB_MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I $(INCLUDE_PATH) -I $(LIB_MLX) $(MLX)
+	@echo "$(GREEN)------------------------$(RESET)"
+	@echo "$(GREEN)$(NAME) is compile !$(RESET)"
+
+%.o: %.c $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@ >/dev/null 2>&1
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I/usr/include -I$(LIB_MLX) -Imlx_linux -c $< -o $@ -I $(INCLUDE_PATH)
@@ -111,43 +119,13 @@ $(NAME): $(OBJS)
 .PHONY: all clean fclean re
 
 clean:
-	rm -f $(OBJS)
+	@echo "$(YELLOW)Removing object files...$(RESET)"
+	@rm -f $(OBJS)
+	@echo "$(GREEN)Object files removed.$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "$(YELLOW)Removing the executable...$(RESET)"
+	@rm -f $(NAME)
+	@echo "$(GREEN)Executable removed.$(RESET)"
 
 re: fclean all
-
-valgrind: all
-	@echo "$(YELLOW)Running minishell with valgrind...$(RESET)"
-	@valgrind $(VALGRIND_OPTIONS) ./$(NAME) $(ARGS)
-
-#*********************************#
-#*           COMMANDS            *#
-#*********************************#
-
-# all: $(NAME)
-
-# $(NAME): $(OBJS)
-# 	@echo "$(YELLOW)Compiling in progress...$(RESET)"
-# 	$(CC) $(CFLAGS) -o $@ $(OBJS)
-# 	@echo "$(GREEN)------------------------$(RESET)"
-# 	@echo "$(GREEN)$(NAME) is compile !$(RESET)"
-
-
-# %.o: %.c $(HEADER)
-# 	@$(CC) $(CFLAGS) -c $< -o $@ >/dev/null 2>&1
-
-# clean:
-# 	@echo "$(YELLOW)Removing object files...$(RESET)"
-# 	@rm -f $(OBJS)
-# 	@echo "$(GREEN)Object files removed.$(RESET)"
-
-# fclean: clean
-# 	@echo "$(YELLOW)Removing the executable...$(RESET)"
-# 	@rm -f $(NAME)
-# 	@echo "$(GREEN)Executable removed.$(RESET)"
-
-# re: fclean all
-
-# .PHONY: all clean fclean re

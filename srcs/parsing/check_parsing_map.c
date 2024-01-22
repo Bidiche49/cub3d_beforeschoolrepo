@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:54 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/06 15:19:06 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 18:48:14 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	check_char(t_pars_map *map)
 	while (map)
 	{
 		i = 0;
-		// if (!map->line || (map->line[0] && map->line[0] == '\n'))
-		// 	error(ERR_LINE_EMPTY, NULL, PARS_KO);
 		while (map->line[i])
 		{
 			if (!is_map_char(map->line[i]))

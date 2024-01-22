@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:05 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/17 19:01:59 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 19:12:23 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	parsing_file(char *path)
 	}
 	if (textures_is_empty(2))
 		error (ERR_MAP_EMPTY, NULL, PARS_KO);
-
 	tracked_close(fd);
 }
 
@@ -81,8 +80,8 @@ t_player	fill_player(char **map)
 			if (is_player(map[y][x]))
 			{
 				player.dir = dir_player(map, x, y);
-				player.posX = (float)x + 0.5f;
-				player.posY = (float)y + 0.5f;
+				player.posx = (float)x + 0.5f;
+				player.posy = (float)y + 0.5f;
 				return (player);
 			}
 			x++;
@@ -90,21 +89,9 @@ t_player	fill_player(char **map)
 		y++;
 	}
 	player.dir = dir_player(map, x, y);
-	player.posX = x;
-	player.posY = y;
+	player.posx = x;
+	player.posy = y;
 	return (player);
-}
-
-void	fill_data(void)
-{
-	t_data	**data;
-
-	data = get_data();
-	*data = ft_calloc(sizeof(t_data), 1);
-	(*data)->ptr = ft_calloc(1, sizeof(t_ptr));
-	(*data)->textures = *get_textures();
-	(*data)->map = cast_map();
-	(*data)->player = fill_player((*data)->map);
 }
 
 void	parsing(int argc, char **argv)
@@ -116,5 +103,4 @@ void	parsing(int argc, char **argv)
 	parsing_file(argv[1]);
 	parsing_map();
 	fill_data();
-	print_data();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: audrye <audrye@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:46:20 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/11 15:06:16 by audrye           ###   ########.fr       */
+/*   Updated: 2024/01/21 19:06:15 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	main(int argc, char **argv)
 {
 	parsing(argc, argv);
 	mlx_loop_init();
-
-	// printf("\n\n=============FIN==================\n");
-	exit_game(NULL);
+	exit_game();
 	return (0);
 }

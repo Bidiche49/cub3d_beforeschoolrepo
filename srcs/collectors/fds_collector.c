@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:02:29 by ntardy            #+#    #+#             */
-/*   Updated: 2023/12/01 02:13:37 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/21 18:47:13 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	tracked_close(int fd)
 	t_fd	*current;
 	t_fd	*prev ;
 
-
 	fds = get_fd();
 	current = *fds;
 	prev = NULL;
@@ -55,9 +54,9 @@ void	tracked_close(int fd)
 				prev->next = current->next;
 			else
 				(*fds) = current->next;
-            close(current->fd);
+			close(current->fd);
 			tracked_free(current);
-            break ;
+			break ;
 		}
 		prev = current;
 		current = current->next;
@@ -66,7 +65,7 @@ void	tracked_close(int fd)
 
 void	collect_fd(void)
 {
-	t_fd *fd_current;
+	t_fd	*fd_current;
 
 	fd_current = *get_fd();
 	while (fd_current)
