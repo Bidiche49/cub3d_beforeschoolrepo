@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:04:39 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/21 19:00:39 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:00:14 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum s_cardinal{
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	DOOR
 }	t_cardinal;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:14:39 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/22 20:43:17 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:14:28 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data		t_data;
 typedef struct s_ptr		t_ptr;
 typedef struct s_face		t_face;
 typedef struct s_extra		t_extra;
+typedef struct s_door		t_door;
 
 struct s_pars_map{
 	char		*line;
@@ -48,11 +49,13 @@ struct s_textures{
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
+	char	*door_path;
 	t_img	*no_img;
 	t_img	*nos_img;
 	t_img	*so_img;
 	t_img	*we_img;
 	t_img	*ea_img;
+	t_img	*door_img;
 	t_color	*floor;
 	t_color	*ceiling;
 } ;
@@ -80,6 +83,7 @@ struct s_data{
 	t_ptr		*ptr;
 	int			cycles_since_last_switch;
 	int			mouse_pos;
+	t_img		*loading_img;
 } ;
 
 struct s_ptr{
@@ -105,6 +109,7 @@ struct s_face{
 	int		wall_start;
 	int		wall_end;
 	int		card;
+	int		is_door;
 } ;
 
 struct s_extra{

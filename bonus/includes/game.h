@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:50:22 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/22 20:40:14 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:27:14 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	mouv_press_s(t_data *data);
 void	mouv_press_a(t_data *data);
 void	mouv_press_d(t_data *data);
 int		mouse_move(int x, int y, t_data *data);
+void	open_doors(t_data *data);
 
 //---------------------------------------//
 //				DISPLAY SCREEN			 //
@@ -44,6 +45,7 @@ void	put_color(t_data *data, int pix_x, int pix_y, t_color *color);
 int		calc_wall_height(int x, t_face face);
 int		print_face(t_data *data, float *current_angle, \
 t_extra extra, int pix_x);
+void	horizontal_compass(t_face *face, t_data *data);
 
 //---------------------------------------//
 //				RAYCASTING				 //

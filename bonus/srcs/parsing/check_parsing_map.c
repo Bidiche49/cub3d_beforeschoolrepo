@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:48:54 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/21 18:48:14 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:33:56 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ void	check_player(t_pars_map *map)
 		i = 0;
 		while (map->line[i])
 		{
-			if (!is_wall_space(map->line[i]) && map->line[i] != '0')
+			if (!is_wall_space(map->line[i]) && map->line[i] != '0'
+				&& map->line[i] != '2')
 				nb_player++;
 			i++;
 		}

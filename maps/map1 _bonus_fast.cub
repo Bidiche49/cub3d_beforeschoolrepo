@@ -1,9 +1,9 @@
-NO ./textures/no_texture.xpm
-NOS ./textures/north_sprite.xpm
-SO ./textures/so_texture.xpm
-WE ./textures/we_texture.xpm
-EA ./textures/ea_texture.xpm
-DOOR ./textures/door_texture.xpm
+NO ./textures/east_texture.xpm
+NOS ./textures/east_texture.xpm
+SO ./textures/east_texture.xpm
+WE ./textures/east_texture.xpm
+EA ./textures/east_texture.xpm
+DOOR ./textures/west_texture.xpm
 
 C 100,100,100
 F 0,0,0

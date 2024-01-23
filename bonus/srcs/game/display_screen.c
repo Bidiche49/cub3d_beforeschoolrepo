@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:34:56 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/21 19:12:23 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:56:31 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,25 @@ int	put_face(t_data *data, int pix_x, t_face face)
 int	compass(t_face *face, t_data *data, t_extra extra)
 {
 	face->dist = shoot_ray(data, face, extra);
+	if (data->map[(int)face->pos_wall_y][(int)face->pos_wall_x] == '2')
+		face->is_door = 1;
+	else
+		face->is_door = 0;
 	if (face->pos_wall_x - (int)face->pos_wall_x == 0)
 	{
 		face->start_wall_width = face->pos_wall_y * -1;
-		face->card = EAST;
+		if (face->is_door == 0)
+			face->card = EAST;
 	}
 	else if (face->pos_wall_y < data->player.posy
 		&& face->pos_wall_y - (int)face->pos_wall_y > 0.999)
 	{
 		face->start_wall_width = face->pos_wall_x * -1;
-		face->card = NORTH;
-	}
-	else if (face->pos_wall_y > data->player.posy
-		&& face->pos_wall_y - (int)face->pos_wall_y < 0.001)
-	{
-		face->start_wall_width = face->pos_wall_x;
-		face->card = SOUTH;
+		if (face->is_door == 0)
+			face->card = NORTH;
 	}
 	else
-	{
-		face->start_wall_width = face->pos_wall_y;
-		face->card = WEST;
-	}
+		horizontal_compass(face, data);
 	return (0);
 }
 

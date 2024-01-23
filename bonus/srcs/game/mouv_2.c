@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:01:40 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/22 20:39:19 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:32:30 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,25 @@ int	mouse_move(int x, int y, t_data *data)
 	data->player.dir -= diff;
 	data->mouse_pos = x;
 	return (0);
+}
+
+void	open_doors(t_data *data)
+{
+	int	p_x;
+	int	p_y;
+
+	p_x = data->player.posx;
+	p_y = data->player.posy;
+	if (data->map[p_y + 1][p_x] == '2')
+		data->map[p_y + 1][p_x] = '0';
+	else if (data->map[p_y][p_x + 1] == '2')
+		data->map[p_y][p_x + 1] = '0';
+	else if (data->map[p_y + 1][p_x + 1] == '2')
+		data->map[p_y + 1][p_x + 1] = '0';
+	else if (data->map[p_y - 1][p_x] == '2')
+		data->map[p_y - 1][p_x] = '0';
+	else if (data->map[p_y][p_x - 1] == '2')
+		data->map[p_y][p_x - 1] = '0';
+	else if (data->map[p_y - 1][p_x - 1] == '2')
+		data->map[p_y - 1][p_x - 1] = '0';
 }

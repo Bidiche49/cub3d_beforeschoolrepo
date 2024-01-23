@@ -6,38 +6,11 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:32:13 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/22 20:43:14 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:29:26 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/game.h"
-
-void	put_pixel(t_img *img, int x, int y, int color)
-{
-	int *const	ptr = (int *)img->data;
-
-	if (x < 0 || y < 0 || x > img->width || y > img->height)
-		return ;
-	ptr[x + y * (img->size_line / (img->bpp / 8))] = color;
-}
-
-void	clear_img(t_img *img, int color)
-{
-	int	index;
-
-	index = 0;
-	while (index < img->width * img->height)
-	{
-		((int *)img->data)[index] = color;
-		++index;
-	}
-}
-
-void	put_color(t_data *data, int pix_x, int pix_y, t_color *color)
-{
-	put_pixel(data->ptr->img, pix_x, pix_y, ((int)(color->r) << 16)
-		| ((int)(color->g) << 8) | (int)(color->b));
-}
 
 int	calc_wall_height(int x, t_face face)
 {
@@ -52,10 +25,9 @@ int	calc_wall_height(int x, t_face face)
 	return (hp);
 }
 
-t_img	*choice_normal_texture(t_img *texture, t_textures *textures, t_face face)
+t_img	*choice_normal_texture(t_img *texture
+, t_textures *textures, t_face face)
 {
-	// if (face.card == NORTH)
-	// 	texture = textures->no_img;
 	if (face.card == SOUTH)
 		texture = textures->so_img;
 	if (face.card == EAST)
@@ -72,7 +44,10 @@ t_img	*choice_txt(t_textures *textures, t_face face)
 
 	texture = NULL;
 	data = *get_data();
-	if (face.card == NORTH) {
+	if (face.is_door == 1)
+		texture = textures->door_img;
+	else if (face.card == NORTH)
+	{
 		if (data->cycles_since_last_switch <= 250)
 			texture = textures->nos_img;
 		else
@@ -81,4 +56,21 @@ t_img	*choice_txt(t_textures *textures, t_face face)
 	else
 		texture = choice_normal_texture(texture, textures, face);
 	return (texture);
+}
+
+void	horizontal_compass(t_face *face, t_data *data)
+{
+	if (face->pos_wall_y > data->player.posy
+		&& face->pos_wall_y - (int)face->pos_wall_y < 0.001)
+	{
+		face->start_wall_width = face->pos_wall_x;
+		if (face->is_door == 0)
+			face->card = SOUTH;
+	}
+	else
+	{
+		face->start_wall_width = face->pos_wall_y;
+		if (face->is_door == 0)
+			face->card = WEST;
+	}
 }

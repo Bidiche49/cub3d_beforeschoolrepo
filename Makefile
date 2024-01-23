@@ -6,7 +6,7 @@
 #    By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/24 18:25:02 by ntardy            #+#    #+#              #
-#    Updated: 2024/01/22 19:37:17 by ntardy           ###   ########.fr        #
+#    Updated: 2024/01/23 19:59:12 by ntardy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ BONUS_FILES_GAME =	$(BONUS_GAME_PATH)init_mlx.c				\
 					$(BONUS_GAME_PATH)mouv.c					\
 					$(BONUS_GAME_PATH)mouv_2.c					\
 					$(BONUS_GAME_PATH)display_screen_utils.c	\
+					$(BONUS_GAME_PATH)display_screen_utils_2.c	\
 					$(BONUS_GAME_PATH)display_screen.c			\
 					$(BONUS_GAME_PATH)raycasting.c				\
 
@@ -154,7 +155,7 @@ $(BONUS_NAME): $(BONUS_OBJS)
 	@make -C $(LIB_MLX)
 	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJS) -I $(BONUS_INCLUDE_PATH) -I $(LIB_MLX) $(MLX)
 	@echo "$(GREEN)------------------------$(RESET)"
-	@echo "$(GREEN)$(NAME) is compile !$(RESET)"
+	@echo "$(GREEN)$(BONUS_NAME) is compile !$(RESET)"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -I/usr/include -I$(LIB_MLX) -Imlx_linux -c $< -o $@ -I $(INCLUDE_PATH)
@@ -180,3 +181,5 @@ fclean: clean
 	@echo "$(GREEN)Executable removed.$(RESET)"
 
 re: fclean all
+
+rebonus: fclean bonus

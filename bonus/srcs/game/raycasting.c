@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:58:50 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/21 19:12:23 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 18:56:24 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ float	shoot_ray(t_data *data, t_face *face, t_extra extra)
 	iter = 0;
 	pos_x = data->player.posx;
 	pos_y = data->player.posy;
-	while (iter < 20 && data->map[(int)pos_y][(int)pos_x] != '1')
+	while (iter < 20 && data->map[(int)pos_y][(int)pos_x] != '1'
+		&& data->map[(int)pos_y][(int)pos_x] != '2')
 	{
 		dist = distance_to_next_edge(pos_x, pos_y, extra.dir_x, extra.dir_y);
 		pos_x += extra.dir_x * dist;

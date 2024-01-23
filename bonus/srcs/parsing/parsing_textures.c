@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:44:15 by ntardy            #+#    #+#             */
-/*   Updated: 2024/01/22 18:32:44 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:05:19 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	if_forest(char *first_word, char *start, t_textures *textures)
 		textures->we_path = check_texture(start);
 	else if (!ft_strcmp(first_word, "EA") && !textures->ea_path)
 		textures->ea_path = check_texture(start);
+	else if (!ft_strcmp(first_word, "DOOR") && !textures->door_path)
+		textures->door_path = check_texture(start);
 	else if (!textures_is_empty(1) && !ft_strcmp(first_word, "C")
 		&& textures->ceiling->b == -1)
 		convert_rgb(start, textures->ceiling);
@@ -82,7 +84,7 @@ int	textures_is_empty(int ref)
 
 	textures = get_textures();
 	if (!(*textures)->no_path || !(*textures)->nos_path
-		|| !(*textures)->so_path)
+		|| !(*textures)->so_path || !(*textures)->door_path)
 		return (1);
 	if (!(*textures)->we_path || !(*textures)->ea_path)
 		return (1);

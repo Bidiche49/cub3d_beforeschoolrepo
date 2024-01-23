@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:20:38 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/22 20:55:32 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/23 21:31:11 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	exit_game(void)
 	mlx_destroy_image((*data)->ptr->mlx, (*data)->textures->no_img);
 	mlx_destroy_image((*data)->ptr->mlx, (*data)->textures->we_img);
 	mlx_destroy_image((*data)->ptr->mlx, (*data)->textures->nos_img);
+	mlx_destroy_image((*data)->ptr->mlx, (*data)->textures->door_img);
 	mlx_destroy_image((*data)->ptr->mlx, (*data)->ptr->img);
 	mlx_destroy_window((*data)->ptr->mlx, (*data)->ptr->win);
 	mlx_destroy_display((*data)->ptr->mlx);
