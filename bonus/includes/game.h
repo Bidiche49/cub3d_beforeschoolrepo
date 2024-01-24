@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:50:22 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/23 21:27:14 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/24 21:01:52 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		calc_wall_height(int x, t_face face);
 int		print_face(t_data *data, float *current_angle, \
 t_extra extra, int pix_x);
 void	horizontal_compass(t_face *face, t_data *data);
+void	plage_shoot(t_data *data, float rot);
 
 //---------------------------------------//
 //				RAYCASTING				 //

@@ -6,7 +6,7 @@
 /*   By: ntardy <ntardy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:50:28 by audrye            #+#    #+#             */
-/*   Updated: 2024/01/23 21:32:03 by ntardy           ###   ########.fr       */
+/*   Updated: 2024/01/24 22:51:16 by ntardy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,64 @@ int	deal_key(int key, t_data *data)
 	return (key);
 }
 
+void print_box(t_data *data, int y, int x, int color)
+{
+	int i;
+	int j;
+	// int index;
+
+	j = 0;
+	while (j < 30)
+	{
+		i = 0;
+		while (i < 30)
+		{
+			put_pixel(data->ptr->img, x * 10 + i, y * 10 + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+int	convert_map_minimap(t_data *data)
+{
+	int				x;
+	int				y;
+
+	y = 0;
+	while (data->map[y])
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if (y == (int)data->player.posy && x == (int)data->player.posx)
+				print_box(data, y, x, 65025);
+			else if (data->map[y][x] == '1')
+				print_box(data, y, x, 0);
+			else if (data->map[y][x] == '0')
+				print_box(data, y, x, 16777215);
+			else if (data->map[y][x] == '2')
+				print_box(data, y, x, 4934475);
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
 int	game_loop(void *mlx_data)
 {
 	t_data *const	data = mlx_data;
 	t_data			*tmp_data;
 
 	tmp_data = *get_data();
-	print_column(data);
+	// clear_img(data->ptr->img, 0x040014);
+	// plage_shoot(tmp_data, tmp_data->player.dir);
+	print_column(tmp_data);
 	tmp_data->cycles_since_last_switch++;
 	if (tmp_data->cycles_since_last_switch >= 500)
 		tmp_data->cycles_since_last_switch = 0;
+	// convert_map_minimap(tmp_data);
 	mlx_put_image_to_window(data->ptr->mlx, data->ptr->win,
 		data->ptr->img, 0, 0);
 	return (0);
@@ -99,10 +147,10 @@ void	mlx_loop_init(void)
 	(*data)->ptr->mlx = mlx_init();
 	if (!(*data)->ptr->mlx)
 		error(ERR_PTR_MLX_KO, NULL, MLX_KO);
-	(*data)->ptr->win = mlx_new_window((*data)->ptr->mlx, 900, 600, "cub3D");
+	(*data)->ptr->win = mlx_new_window((*data)->ptr->mlx, 1200, 800, "cub3D");
 	if (!(*data)->ptr->win)
 		error(ERR_PTR_WIN_KO, NULL, MLX_KO);
-	(*data)->ptr->img = mlx_new_image((*data)->ptr->mlx, 900, 600);
+	(*data)->ptr->img = mlx_new_image((*data)->ptr->mlx, 1200, 800);
 	(*data)->ptr->img->data = mlx_get_data_addr((*data)->ptr->img,
 			&(*data)->ptr->img->bpp,
 			&(*data)->ptr->img->size_line,
